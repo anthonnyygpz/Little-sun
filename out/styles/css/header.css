@@ -1,0 +1,9 @@
+.logo {
+  background-color: var(--color-purple-background);
+  border: 0.6px solid var(--color-purple);
+  border-radius: 5px;
+  width: fit-content;
+  margin: 20px;
+  padding: 10px;
+  color: var(--color-primary);
+}
