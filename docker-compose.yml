@@ -1,0 +1,56 @@
+services:
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - app-network
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./frontend
+  #         target: ./frontend/src/
+  #       - path: ./frontend/package.json
+  #         action: rebuild
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ./backend/.env
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    container_name: db
+    image: postgres:17.2
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: antonty15
+      DB_NAME: little_sun
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
