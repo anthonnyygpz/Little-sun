@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import {
-  fetchQuotes,
-  createQuote,
-  updateQuote,
-  deleteSculping,
+  getAllQuoteApi,
+  createQuoteApi,
+  updateQuoteApi,
+  deleteQuoteApi,
+  deleteNailSizeApi,
 } from "../api/enpoints/quoteApi.ts";
 import {
   QuoteCreate,
@@ -18,36 +19,64 @@ const useQuoteApi = () => {
 
   const addQuote = async (newQuote: QuoteCreate) => {
     try {
-      const createdQuote = await createQuote(newQuote);
+      const createdQuote = await createQuoteApi(newQuote);
+      sessionStorage.removeItem("quotes");
+      getAllQuotes();
       return createdQuote;
     } catch {
       setError("Failed to create quote");
     }
   };
 
-  const getQuotes = async () => {
-    try {
-      const data = await fetchQuotes();
-      setQuotes(data);
-    } catch {
-      setError("Failed to fetch quotes");
-    } finally {
+  const getAllQuotes = async () => {
+    const cacheSize = sessionStorage.getItem("quotes");
+    if (cacheSize) {
+      setQuotes(JSON.parse(cacheSize));
       setLoading(false);
+    } else {
+      const getQuotes = async () => {
+        try {
+          const data = await getAllQuoteApi();
+          sessionStorage.setItem("quotes", JSON.stringify(data));
+          setQuotes(data);
+        } catch {
+          setError("Failed to fetch quotes");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      getQuotes();
     }
   };
 
   const editQuote = async (newQuote: QuoteUpdate) => {
     try {
-      const updatedQuote = await updateQuote(newQuote);
+      const updatedQuote = await updateQuoteApi(newQuote);
+      sessionStorage.removeItem("quotes");
+      getAllQuoteApi();
       return updatedQuote;
     } catch {
       setError("Failed to create quote");
     }
   };
 
-  const deleteSculpingSize = async (id: number) => {
+  const deleteQuote = async (id: number) => {
     try {
-      const data = await deleteSculping(id);
+      const data = await deleteQuoteApi(id);
+      sessionStorage.removeItem("quotes");
+      getAllQuoteApi();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteNailSize = async (id: number) => {
+    try {
+      const data = await deleteNailSizeApi(id);
+      sessionStorage.removeItem("quotes");
+      getAllQuoteApi();
       return data;
     } catch (error) {
       console.log(error);
@@ -55,7 +84,7 @@ const useQuoteApi = () => {
   };
 
   useEffect(() => {
-    getQuotes();
+    getAllQuotes();
   }, []);
 
   return {
@@ -63,9 +92,10 @@ const useQuoteApi = () => {
     loading,
     error,
     addQuote,
-    getQuotes,
+    getAllQuotes,
     editQuote,
-    deleteSculpingSize,
+    deleteNailSize,
+    deleteQuote,
   };
 };
 

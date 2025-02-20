@@ -1,6 +1,6 @@
 export interface FormData {
   clientInfo: { name: string; phone: number };
-  nailSize: { selectedValue: string; id: number };
+  nailSize: { selectedValue: string; id: number; price: number };
   services: {
     options: number[];
     services: { name: string; price: number }[];
@@ -9,5 +9,5 @@ export interface FormData {
     options: number[];
     designs: { name: string; price: number }[];
   };
-  totalPrice: 0;
+  totalPrice: number;
 }

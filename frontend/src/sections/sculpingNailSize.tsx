@@ -7,7 +7,11 @@ import AlertDialog from "../components/AlertDialog.tsx";
 import { useSculpingSize } from "../hooks/useSculpingSizeSection.ts";
 
 interface SculpingNailSizeProps {
-  onChange: (data: { selectedValue: string; id: number }) => void;
+  onChange: (data: {
+    selectedValue: string;
+    id: number;
+    price: number;
+  }) => void;
   defaultSculpingSize?: string;
   handleDelete?: (is_delete: boolean) => void;
 }
@@ -39,11 +43,11 @@ const SculpingNailSize: React.FC<SculpingNailSizeProps> = ({
             idKey={sculpingSize.size_id}
             name={sculpingSize.size_name}
             value={sculpingSize.size_name}
+            price={sculpingSize.base_price}
             selectedValue={selectedOption}
-            onChange={(selectedValue, id) =>
-              handleOptionChange(selectedValue, id)
-            }
+            onChange={(data) => handleOptionChange(data)}
           />
+          <Label className="label" text={` - $${sculpingSize.base_price}`} />
         </div>
       ))}
       {defaultSculpingSize !== "" ? (

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchSculpings } from "../api/enpoints/sculpinNailSizeApi.ts";
+import {
+  getAllSculpingApi,
+  deleteSculpingApi,
+} from "../api/enpoints/sculpinNailSizeApi.ts";
 import { SculpingNailSize } from "../models/sculpingNailSize.models.ts";
 
 const useSculpingNailSizeApi = () => {
@@ -15,7 +18,7 @@ const useSculpingNailSizeApi = () => {
     } else {
       const getSculpingSizes = async () => {
         try {
-          const data = await fetchSculpings();
+          const data = await getAllSculpingApi();
           setSculpingSizes(data);
           sessionStorage.setItem("sculpingSizes", JSON.stringify(data));
         } catch {
@@ -28,11 +31,21 @@ const useSculpingNailSizeApi = () => {
     }
   };
 
+  const deleteSculpingSize = async (id: number) => {
+    try {
+      const data = await deleteSculpingApi(id);
+      return data;
+    } catch (error) {
+      console.error("Error deleting sculping size:", error);
+      throw error; // Opcional: puedes relanzar el error si necesitas manejarlo en otro lugar
+    }
+  };
+
   useEffect(() => {
     getAllSculpingSize();
   }, []);
 
-  return { sculpingSizes, loading, error };
+  return { sculpingSizes, loading, error, deleteSculpingSize };
 };
 
 export default useSculpingNailSizeApi;

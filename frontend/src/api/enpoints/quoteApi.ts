@@ -6,7 +6,7 @@ import {
 } from "../../models/quote.models.ts";
 
 // Función para obtener los quotes (GET)
-export const fetchQuotes = async (): Promise<QuoteResponse[]> => {
+export const getAllQuoteApi = async (): Promise<QuoteResponse[]> => {
   try {
     const response = await apiClient.get<QuoteResponse[]>("/quotes/all"); // Asegúrate de que la ruta sea correcta
     return response.data;
@@ -17,7 +17,7 @@ export const fetchQuotes = async (): Promise<QuoteResponse[]> => {
 };
 
 // Función para crear un nuevo quote (POST)
-export const createQuote = async (
+export const createQuoteApi = async (
   quote: QuoteCreate,
 ): Promise<QuoteResponse> => {
   try {
@@ -29,7 +29,7 @@ export const createQuote = async (
   }
 };
 
-export const updateQuote = async (quote: QuoteUpdate) => {
+export const updateQuoteApi = async (quote: QuoteUpdate) => {
   try {
     const response = await apiClient.put("/quotes/update", quote);
     return response.data;
@@ -39,7 +39,7 @@ export const updateQuote = async (quote: QuoteUpdate) => {
   }
 };
 
-export const deleteQuote = async (id: number) => {
+export const deleteQuoteApi = async (id: number) => {
   try {
     const response = await apiClient.delete("/quotes/delete?quote_id=" + id);
     return response.data;
@@ -48,13 +48,14 @@ export const deleteQuote = async (id: number) => {
   }
 };
 
-export const deleteSculping = async (id: number) => {
+export const deleteNailSizeApi = async (id: number) => {
   try {
     const response = await apiClient.put(
       "/quotes/delete_sculping?quote_id=" + id,
     );
     return response.data;
-  } catch {
-    throw new Error("Failded to fetch quotes");
+  } catch (error) {
+    console.error("Error deleting quote:", error);
+    throw new Error("Failed to delete quote");
   }
 };

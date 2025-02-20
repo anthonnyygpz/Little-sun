@@ -5,6 +5,7 @@ import { CheckboxList } from "../components/checkbox.tsx";
 import Label from "../components/label.tsx";
 import AlertDialog from "../components/AlertDialog.tsx";
 import { useServices } from "../hooks/useServiceSection.ts";
+import { PilcrowLeft } from "lucide-react";
 
 interface ServicesProps {
   onChange: (data: {
@@ -46,6 +47,7 @@ const Services: React.FC<ServicesProps> = ({
               handleCheckboxChange(service_id, service_name, price)
             }
           />
+          <Label className="label" text={` - $${price}`} />
         </div>
       ))}
       {defaultService !== "" ? (

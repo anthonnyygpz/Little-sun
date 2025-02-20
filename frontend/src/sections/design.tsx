@@ -46,6 +46,7 @@ const Design: React.FC<DesignProps> = ({
               handleCheckboxChange(design_id, design_name, price)
             }
           />
+          <Label className="label" text={` - $${price}`} />
         </div>
       ))}
       {defaultDesign !== "" ? (

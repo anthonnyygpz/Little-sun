@@ -42,6 +42,10 @@ const Resume: React.FC<FormDataProps> = ({ formData }) => {
         <Label className="label" text={clientInfo.name} />
       </div>
       <div className="wrapper label-between">
+        <Label text="Numero de telefono del cliente:" />
+        <Label className="label" text={`${clientInfo.phone}`} />
+      </div>
+      <div className="wrapper label-between">
         <Label text="Tamaño de esculpido:" />
         <Label className="label" text={nailSize.selectedValue} />
       </div>
@@ -51,7 +55,7 @@ const Resume: React.FC<FormDataProps> = ({ formData }) => {
         ? services.services.map((service, index) => (
             <div key={index} className="wrapper label-between">
               <Label text={service.name} />
-              <Label className="label" text={`$${service.price}`} />{" "}
+              <Label className="label" text={`$${service.price}`} />
             </div>
           ))
         : ""}
@@ -62,7 +66,7 @@ const Resume: React.FC<FormDataProps> = ({ formData }) => {
         ? designs.designs.map((design, index) => (
             <div key={index} className="wrapper label-between">
               <Label text={`Diseño ${design.name}`} />
-              <Label className="label" text={`$${design.price}`} />{" "}
+              <Label className="label" text={`$${design.price}`} />
             </div>
           ))
         : ""}

@@ -1,9 +1,8 @@
 import Swal from "sweetalert2";
 import useQuoteApi from "./useQuoteApi.ts";
-import { deleteQuote } from "../api/enpoints/quoteApi.ts";
 
 export const useAlert = () => {
-  const { getQuotes } = useQuoteApi();
+  const { deleteQuote, getAllQuotes } = useQuoteApi();
 
   const handleAlertDelete = async (quote_id: number, nameText: string) => {
     Swal.fire({
@@ -15,7 +14,7 @@ export const useAlert = () => {
       try {
         if (result.isConfirmed) {
           await deleteQuote(quote_id);
-          getQuotes();
+          getAllQuotes();
           Swal.fire(
             "¡Exito!",
             "Los datos fueron borrados con exito",

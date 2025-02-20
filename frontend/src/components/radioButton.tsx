@@ -2,14 +2,20 @@ type RadioButtonGroupProps = {
   idKey: number;
   name: string;
   value: string;
+  price: number;
   selectedValue: string;
-  onChange: (selectedValue: string, id: number) => void;
+  onChange: (data: {
+    selectedValue: string;
+    id: number;
+    price: number;
+  }) => void;
 };
 
 const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   idKey,
   name,
   value,
+  price,
   onChange,
   selectedValue,
 }) => {
@@ -23,7 +29,9 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
         name={name}
         value={value}
         checked={selectedValue === value}
-        onChange={(e) => onChange(e.target.value, idKey)}
+        onChange={(e) =>
+          onChange({ selectedValue: e.target.value, id: idKey, price: price })
+        }
       />
       {name}
     </label>

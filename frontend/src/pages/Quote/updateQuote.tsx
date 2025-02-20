@@ -10,14 +10,15 @@ import Resume from "../../sections/resume.tsx";
 import Status from "../../sections/status.tsx";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteSculping, updateQuote } from "../../api/enpoints/quoteApi.ts";
 import { decode } from "js-base64";
 import { deleteQuoteService } from "../../api/enpoints/quoteServiceApi.ts";
 import { deleteQuoteDesign } from "../../api/enpoints/quoteDesignApi.ts";
+import useQuoteApi from "../../hooks/useQuoteApi.ts";
 
 const UpdateQuote: React.FC = () => {
   const { data } = useParams();
   const dataDecode = data ? JSON.parse(decode(data)) : null;
+  const { editQuote, deleteNailSize } = useQuoteApi();
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -75,7 +76,7 @@ const UpdateQuote: React.FC = () => {
   const resetAll = () => {
     setFormData({
       clientInfo: { name: "", phone: 0 },
-      nailSize: { selectedValue: "", id: 0 },
+      nailSize: { selectedValue: "", id: 0 as number },
       services: {
         options: [] as number[],
         services: [] as { name: string; price: number }[],
@@ -137,7 +138,7 @@ const UpdateQuote: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    await updateQuote({
+    await editQuote({
       quote_id: dataDecode.quote_id,
       client_id: dataDecode.client_id,
       nail_size_id: formData.nailSize.id,
@@ -148,8 +149,9 @@ const UpdateQuote: React.FC = () => {
       services: formData.services.options,
       status: formData.status.selectedValue,
     });
+
     if (isDeleteSculpingSize === true) {
-      await deleteSculping(dataDecode.quote_id);
+      await deleteNailSize(dataDecode.quote_id);
     }
 
     if (isDeleteService === true) {

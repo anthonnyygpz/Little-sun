@@ -16,16 +16,13 @@ const useFormSubmit = (formData: FormData) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (formData) {
-      console.log(formData);
       let clientId = 0;
       let quoteId = 0;
       const getClientIfExists = await getByNameClient(formData.clientInfo.name);
 
       if (getClientIfExists) {
-        console.log("Entro en el primer if");
         clientId = getClientIfExists["client_id"];
       } else {
-        console.log("Entro en el segundo if");
         const createClient = await addClient({
           name: formData.clientInfo.name,
           phone_number: formData.clientInfo.phone,

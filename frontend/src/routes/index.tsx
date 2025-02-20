@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import QuotePage from "../pages/Quote/QuotePage.tsx";
+import QuotePage from "../pages/Quote/quotePage.tsx";
 import GenerateQuote from "../pages/Quote/generateQuote.tsx";
 import UpdateQuote from "../pages/Quote/updateQuote.tsx";
 import ClientsPage from "../pages/Client/clientsPage.tsx";

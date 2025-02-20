@@ -25,7 +25,6 @@ function GenerateQuotePage() {
   return (
     <DefaultLayout site="Generar cita">
       <Title title="Generar Citas" className="title-purple" />
-
       <ButtonLink icon={<ChevronLeft size={30} />} text="Regresar" route="/" />
       <form onSubmit={handleSubmit}>
         <ClientInfo onChange={handleClientInfoChange} inputRequired={true} />

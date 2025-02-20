@@ -5,6 +5,9 @@ import { Title } from "../../components/title.tsx";
 import useServiceApi from "../../hooks/useServiceApi.ts";
 import DefaultLayout from "../../layouts/defaultLayout.tsx";
 import EditServiceCard from "../../sections/editServiceCard.tsx";
+import Button from "../../components/Buttons/button.tsx";
+import { ButtonLink } from "../../components/Buttons/buttonLink.tsx";
+import { ChevronLeft } from "lucide-react";
 
 const EditServices: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -41,9 +44,14 @@ const EditServices: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
+    <DefaultLayout site="Aculizar Servicio">
       <form onSubmit={handleSubmit}>
-        <Title title="Editar Servicio" className="title-purple" />
+        <Title title="Actulizar Servicio" className="title-purple" />
+        <ButtonLink
+          icon={<ChevronLeft size={30} />}
+          text="Regresar"
+          route="/Designs"
+        />
         <EditServiceCard
           onChange={handleEditServiceChange}
           defaultService={dataDecode}
