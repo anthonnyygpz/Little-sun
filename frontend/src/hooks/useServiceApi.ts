@@ -9,7 +9,7 @@ import {
   ServiceCreate,
   ServiceResponse,
   ServiceUpdate,
-} from "../models/Services.models.ts";
+} from "../models/services.models.ts";
 
 const useServiceApi = () => {
   const [services, setServices] = useState<ServiceResponse[]>([]);
@@ -21,6 +21,7 @@ const useServiceApi = () => {
   ): Promise<ServiceCreate> => {
     try {
       const data = await addServiceApi(newServices);
+      sessionStorage.removeItem("services");
       getAllServicesApi();
       return data;
     } catch (error) {
@@ -56,6 +57,8 @@ const useServiceApi = () => {
   ): Promise<ServiceResponse> => {
     try {
       const data = await updateServiceApi(editServices);
+      sessionStorage.removeItem("services");
+      getAllServicesApi();
       return data;
     } catch (error) {
       console.error("Error updating service:", error);
@@ -67,6 +70,7 @@ const useServiceApi = () => {
     try {
       const data = await deleteServiceApi(id);
       sessionStorage.removeItem("services");
+      getAllServicesApi();
       return data;
     } catch (error) {
       console.error("Error deleting service:", error);

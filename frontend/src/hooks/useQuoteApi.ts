@@ -9,7 +9,7 @@ import {
   QuoteCreate,
   QuoteResponse,
   QuoteUpdate,
-} from "../models/Quote.models.ts";
+} from "../models/quote.models.ts";
 
 const useQuoteApi = () => {
   const [quotes, setQuotes] = useState<QuoteResponse[]>([]);

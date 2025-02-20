@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useServiceApi from "./useServiceApi";
+import useServiceApi from "./useServiceApi.ts";
 
 interface SelectedItems {
   options: number[];

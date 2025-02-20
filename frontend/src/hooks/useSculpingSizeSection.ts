@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useSculpingNailSizeApi from "./useSculpingNailSizeApi";
+import useSculpingNailSizeApi from "./useSculpingNailSizeApi.ts";
 
 interface useSculpingNailSizeProps {
   onChange: (data: { selectedValue: string; id: number }) => void;

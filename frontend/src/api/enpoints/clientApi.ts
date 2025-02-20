@@ -2,7 +2,7 @@ import {
   ClientResponse,
   ClientCreate,
   ClientUpdate,
-} from "../../models/Client.modesls.ts";
+} from "../../models/client.modesls.ts";
 import apiClient from "../apiClient.ts";
 
 export const fetchClient = async () => {

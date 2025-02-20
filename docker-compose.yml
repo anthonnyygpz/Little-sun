@@ -33,13 +33,13 @@ services:
       - app-network
 
   db:
-    container_name: db
+    container_name: little_sun
     image: postgres:17.2
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: postgres
-      DB_PASSWORD: antonty15
+      POSTGRES_PASSWORD: antony15
       DB_NAME: little_sun
     volumes:
       - postgres_data:/var/lib/postgresql/data

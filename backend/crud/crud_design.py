@@ -13,7 +13,6 @@ class CRUDDesign:
         try:
             obj_db = Design(
                 design_name=obj_in.design_name,
-                description=obj_in.description,
                 price=obj_in.price,
             )
             db.add(obj_db)
@@ -40,8 +39,6 @@ class CRUDDesign:
         obj_design = {}
         if obj_in.design_name != "":
             obj_design["design_name"] = obj_in.design_name
-        if obj_in.description != "":
-            obj_design["description"] = obj_in.description
         if obj_in.price != 0:
             obj_design["price"] = obj_in.price
         if obj_design:

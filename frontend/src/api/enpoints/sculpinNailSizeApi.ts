@@ -10,10 +10,11 @@ export const fetchSculpings = async () => {
 
 export const getByIdSculping = async (id: number) => {
   try {
-    const response = await apiClient.get("/sculpign_nail_size/get_by_id?id=" + id);
+    const response = await apiClient.get(
+      "/sculpign_nail_size/get_by_id?id=" + id,
+    );
     return response.data;
   } catch {
     throw new Error("Failded to fetch quotes");
   }
-}
-
+};

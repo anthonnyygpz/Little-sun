@@ -1,4 +1,4 @@
-import Button from "../components/Button.tsx";
+import Button from "../components/Buttons/button.tsx";
 import Swal from "sweetalert2";
 
 interface AlertDialogProps {
@@ -7,8 +7,11 @@ interface AlertDialogProps {
   onChange: (deleteData: boolean) => void;
 }
 
-const AlertDialog: React.FC<AlertDialogProps> = ({ nameText, nameSection, onChange }) => {
-
+const AlertDialog: React.FC<AlertDialogProps> = ({
+  nameText,
+  nameSection,
+  onChange,
+}) => {
   const handleAlertDelete = () => {
     Swal.fire({
       icon: "warning",
@@ -20,21 +23,21 @@ const AlertDialog: React.FC<AlertDialogProps> = ({ nameText, nameSection, onChan
         if (result.isConfirmed) {
           onChange(true);
           Swal.fire(
-            '¡Exito!',
-            'Los datos fueron borrados con exito',
-            'success'
+            "¡Exito!",
+            "Los datos fueron borrados con exito",
+            "success",
           );
         }
       } catch {
         Swal.fire(
-          '¡Error!',
-          'A surgido un error inesperado intentelo mas tarde.',
-          'error'
+          "¡Error!",
+          "A surgido un error inesperado intentelo mas tarde.",
+          "error",
         );
       }
     });
-  }
-  return <Button text="Eliminar" onClick={() => handleAlertDelete()} />
-}
+  };
+  return <Button text="Eliminar" onClick={() => handleAlertDelete()} />;
+};
 
 export default AlertDialog;

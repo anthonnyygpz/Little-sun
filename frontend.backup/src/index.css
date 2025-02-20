@@ -23,6 +23,7 @@
 }
 
 /* BUTTONS */
+
 .delete-button {
   background-color: var(--color-red);
   color: white;
@@ -35,11 +36,17 @@
   color: var(--color-red);
 }
 
-.edit-button {
+.button-edit {
+  display: flex;
+  align-items: center;
+  gap: 2;
   background-color: var(--color-blue);
   color: var(--color-white);
   border: none;
   border-radius: 5px;
+}
+.button-edit span {
+  text-decoration-line: none;
 }
 
 .edit-button :active {
@@ -47,7 +54,16 @@
   color: var(--color-blue);
 }
 
-.content-buttons {
+.button-link {
+  display: flex;
+  align-items: center;
+  gap: 2;
+}
+.button-link span {
+  font-size: 1rem;
+}
+
+.container-buttons {
   display: flex;
   gap: 8px;
 }
@@ -180,10 +196,6 @@ button:active {
   font-size: 1rem;
 }
 
-.icon-text {
-  display: flex;
-}
-
 .label {
   color: var(--color-green);
 }
@@ -301,4 +313,71 @@ label {
   .input-group:nth-child(3) {
     grid-column: 1 / -1;
   }
+}
+
+.content-button-hamburguer {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+}
+
+.container-link {
+  position: absolute;
+  bottom: 4rem; /* 16 unidades en la escala de Tailwind (aproximado) */
+  left: 0;
+  margin-bottom: 0.5rem; /* 2 unidades en la escala de Tailwind (aproximado) */
+  background-color: white;
+  border-radius: 0.5rem; /* Valor común para rounded-lg */
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -1px rgb(0 0 0 / 0.06); /* Equivalente a shadow-xl */
+  width: 12rem; /* 48 unidades en la escala de Tailwind (aproximado) */
+  overflow: hidden;
+  transform: translate(0, 0); /* Valor inicial de la transformación */
+  transition: all 150ms ease-in-out; /* Transición suave */
+}
+
+.link {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.link a {
+  display: block;
+  padding: 10px;
+  color: #4a5568; /* Equivalente aproximado a text-gray-700 */
+  text-decoration-line: none;
+  transition:
+    background-color 150ms ease-in-out,
+    color 150ms ease-in-out; /* Transición para hover */
+}
+
+.link a:hover {
+  background-color: #f3f4f6; /* Equivalente aproximado a hover:bg-gray-100 */
+}
+
+.scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
 }

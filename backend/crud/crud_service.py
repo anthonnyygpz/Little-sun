@@ -12,7 +12,6 @@ class CRUDService:
         try:
             obj_db = Service(
                 service_name=obj_in.service_name,
-                description=obj_in.description,
                 price=obj_in.price,
             )
             db.add(obj_db)

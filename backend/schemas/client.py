@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class ClientBase(BaseModel):
-    name: Optional[str]
+    name: str
     phone_number: Optional[int]
 
 

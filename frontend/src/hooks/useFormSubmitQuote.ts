@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import useQuoteApi from "./useQuoteApi";
-import useClientApi from "./useClientApi";
-import useQuoteServiceApi from "./useQuoteServiceApi";
-import useQuoteDesignApi from "./useQuoteDesignApi";
+import useClientApi from "./useClientApi.ts";
+import useQuoteServiceApi from "./useQuoteServiceApi.ts";
+import useQuoteDesignApi from "./useQuoteDesignApi.ts";
 import { FormEvent } from "react";
-import { FormData } from "../models/FormData.models";
+import { FormData } from "../models/formData.models";
 
 const useFormSubmit = (formData: FormData) => {
   const { addQuote } = useQuoteApi();

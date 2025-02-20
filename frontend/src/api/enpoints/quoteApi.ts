@@ -3,7 +3,7 @@ import {
   QuoteResponse,
   QuoteCreate,
   QuoteUpdate,
-} from "../../models/Quote.models.ts";
+} from "../../models/quote.models.ts";
 
 // Función para obtener los quotes (GET)
 export const fetchQuotes = async (): Promise<QuoteResponse[]> => {

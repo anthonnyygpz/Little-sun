@@ -8,7 +8,6 @@ class SculpingNailSize(Base):
 
     size_id = Column(Integer, primary_key=True, autoincrement=True)
     size_name = Column(String, nullable=False)
-    description = Column(String)
     base_price = Column(Integer, nullable=False)
 
     quotes = relationship("Quote", back_populates="sculping_sizes")

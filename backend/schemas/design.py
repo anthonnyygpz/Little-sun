@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 class DesignBase(BaseModel):
     design_name: str
-    description: Optional[str]
     price: int
 
 

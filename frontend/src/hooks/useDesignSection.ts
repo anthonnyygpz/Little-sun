@@ -1,4 +1,4 @@
-import useDesignApi from "./useDesignApi";
+import useDesignApi from "./useDesignApi.tsx";
 import { useState } from "react";
 
 interface DesignProps {

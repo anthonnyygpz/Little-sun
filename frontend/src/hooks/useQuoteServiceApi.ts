@@ -1,4 +1,4 @@
-import { QuoteServiceCreate } from "../models/QuoteService.models.ts";
+import { QuoteServiceCreate } from "../models/quoteService.models.ts";
 import { createQuoteService } from "../api/enpoints/quoteServiceApi.ts";
 
 const useQuoteServiceApi = () => {

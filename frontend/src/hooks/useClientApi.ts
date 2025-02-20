@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import {
   ClientCreate,
   ClientResponse,
   ClientUpdate,
-} from "../models/Client.modesls.ts";
+} from "../models/client.modesls.ts";
 import {
   fetchByNameClient,
   createClient,
@@ -11,6 +10,7 @@ import {
   deleteClient,
   updateClient,
 } from "../api/enpoints/clientApi.ts";
+import { useEffect, useState } from "react";
 
 const useClientApi = () => {
   const [clients, setClients] = useState<ClientResponse>();

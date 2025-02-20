@@ -1,7 +1,7 @@
 import {
   ServiceCreate,
   ServiceResponse,
-} from "../../models/Services.models.ts";
+} from "../../models/services.models.ts";
 import apiClient from "../apiClient.ts";
 
 export const addServiceApi = async (

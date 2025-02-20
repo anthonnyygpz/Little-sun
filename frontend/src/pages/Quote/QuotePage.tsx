@@ -1,10 +1,10 @@
-import { MenuHamburguer } from "../../components/Buttons/MenuHamburguer.tsx";
-import DefaultLayout from "../../layouts/DefaultLayout.tsx";
-import TableQuote from "../../sections/TableQuote.tsx";
+import { MenuHamburguer } from "../../components/Buttons/menuHamburguer.tsx";
+import DefaultLayout from "../../layouts/defaultLayout.tsx";
+import TableQuote from "../../sections/tableQuote.tsx";
 
 function QuotePage() {
   return (
-    <DefaultLayout>
+    <DefaultLayout site="Citas">
       <TableQuote />
       <MenuHamburguer />
     </DefaultLayout>

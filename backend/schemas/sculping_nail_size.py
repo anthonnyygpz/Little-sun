@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 class SculpingSizeBase(BaseModel):
     size_name: str
-    description: Optional[str]
     base_price: int
 
 

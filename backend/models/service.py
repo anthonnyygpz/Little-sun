@@ -9,7 +9,6 @@ class Service(Base):
 
     service_id = Column(Integer, primary_key=True, autoincrement=True)
     service_name = Column(String, nullable=False)
-    description = Column(String, nullable=True)
     price = Column(Integer, nullable=False)
 
     quotes = relationship(

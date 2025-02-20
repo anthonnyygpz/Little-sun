@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 class ServiceBase(BaseModel):
     service_name: str
-    description: Optional[str]
     price: int
 
 

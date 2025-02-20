@@ -1,4 +1,4 @@
-import { QuoteDesignCreate } from "../models/QuoteDesign.models.ts";
+import { QuoteDesignCreate } from "../models/quoteDesign.models.ts";
 import { createQuoteDesign } from "../api/enpoints/quoteDesignApi.ts";
 
 const useQuoteDesign = () => {

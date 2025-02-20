@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSculpings } from "../api/enpoints/sculpinNailSizeApi.ts";
-import { SculpingNailSize } from "../models/SculpingNailSize.models.ts";
+import { SculpingNailSize } from "../models/sculpingNailSize.models.ts";
 
 const useSculpingNailSizeApi = () => {
   const [sculpingSizes, setSculpingSizes] = useState<SculpingNailSize[]>([]);

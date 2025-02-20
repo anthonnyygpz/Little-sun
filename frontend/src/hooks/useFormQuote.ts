@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormData } from "../models/FormData.models";
+import { FormData } from "../models/formData.models";
 
 const useFormState = () => {
   const [formData, setFormData] = useState<FormData>({
