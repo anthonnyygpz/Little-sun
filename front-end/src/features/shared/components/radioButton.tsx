@@ -2,7 +2,7 @@ type RadioButtonGroupProps = {
   idKey: number;
   name: string;
   value: string;
-  price: number;
+  price?: number;
   selectedValue: string;
   onChange: (data: {
     selectedValue: string;
@@ -15,7 +15,7 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   idKey,
   name,
   value,
-  price,
+  price = 0,
   onChange,
   selectedValue,
 }) => {

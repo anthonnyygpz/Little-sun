@@ -21,6 +21,7 @@ const Statu: React.FC<StatuProps> = ({ onChange }) => {
     setSelectedOption(""); // Reinicia el valor seleccionado
     onChange({ selectedValue: "", id: 0 }); // Pasa el objeto con valores por defecto
   };
+
   return (
     <ContainerSection>
       <SubTittle title="Esatus" />
@@ -31,10 +32,21 @@ const Statu: React.FC<StatuProps> = ({ onChange }) => {
             name={statu}
             value={statu}
             selectedValue={selectedOption}
-            onChange={(selectedValue, id) =>
-              handleOptionChange(selectedValue, id)
-            }
+            onChange={(data: {
+              selectedValue: string;
+              id: number;
+              price: number;
+            }) => handleOptionChange(data.selectedValue, data.id)}
           />
+          {/* <RadioButtonGroup */}
+          {/*   idKey={index} */}
+          {/*   name={statu} */}
+          {/*   value={statu} */}
+          {/*   selectedValue={selectedOption} */}
+          {/*   onChange={(selectedValue: string, id: number) => */}
+          {/*     handleOptionChange(selectedValue, id) */}
+          {/*   } */}
+          {/* /> */}
         </div>
       ))}
 

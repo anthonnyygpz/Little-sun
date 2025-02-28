@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log({ email, password, rememberMe });
   };

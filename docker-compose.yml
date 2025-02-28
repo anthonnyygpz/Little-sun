@@ -1,22 +1,22 @@
 services:
-  # frontend:
-  #   container_name: frontend
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - app-network
-  #   develop:
-  #     watch:
-  #       - action: sync
-  #         path: ./frontend
-  #         target: ./frontend/src/
-  #       - path: ./frontend/package.json
-  #         action: rebuild
+  frontend:
+    container_name: front-end
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    develop:
+      watch:
+        - action: sync
+          path: ./front-end
+          target: ./front-end/src/
+        - path: ./front-end/package.json
+          action: rebuild
 
   backend:
     container_name: backend
