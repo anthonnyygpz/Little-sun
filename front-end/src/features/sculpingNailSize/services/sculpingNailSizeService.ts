@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getAllSculpingApi,
   deleteSculpingApi,
-} from "../../../lib/enpoints/sculpinNailSizeApi.ts";
+} from "../../../libs/enpoints/sculpinNailSizeApi.ts";
 import { SculpingNailSizeResponse } from "../../shared/types/sculpingNailSizeTypes.ts";
 
 const SculpingNailSizeService = () => {

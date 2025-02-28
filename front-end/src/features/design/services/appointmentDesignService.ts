@@ -1,5 +1,5 @@
 import { AppointmentDesignCreate } from "../../shared/types/appointmentDesignTypes.ts";
-import { createAppointmentDesign } from "../../../lib/enpoints/appointmentDesignApi.ts";
+import { createAppointmentDesign } from "../../../libs/enpoints/appointmentDesignApi.ts";
 
 const AppointmentDesignService = () => {
   const addAppointmentDesign = async (

@@ -4,7 +4,7 @@ import {
   getAllServicesApi,
   updateServiceApi,
   deleteServiceApi,
-} from "../../../lib/enpoints/servicesApi.ts";
+} from "../../../libs/enpoints/servicesApi.ts";
 import {
   ServiceCreate,
   ServiceResponse,

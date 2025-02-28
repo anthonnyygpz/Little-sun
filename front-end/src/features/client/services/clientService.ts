@@ -9,7 +9,7 @@ import {
   fetchClient,
   deleteClient,
   updateClient,
-} from "../../../lib/enpoints/clientApi.ts";
+} from "../../../libs/enpoints/clientApi.ts";
 import { useEffect, useState } from "react";
 
 const ClientService = () => {

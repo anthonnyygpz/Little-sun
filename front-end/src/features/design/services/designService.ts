@@ -4,7 +4,7 @@ import {
   addDesignApi,
   updateDesignApi,
   deleteDesignApi,
-} from "../../../lib/enpoints/designApi.ts";
+} from "../../../libs/enpoints/designApi.ts";
 import {
   DesignCreate,
   DesignResponse,

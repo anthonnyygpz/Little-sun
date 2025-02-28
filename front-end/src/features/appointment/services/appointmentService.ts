@@ -5,7 +5,7 @@ import {
   updateAppointmentApi,
   deleteAppointmentApi,
   deleteNailSizeApi,
-} from "../../../lib/enpoints/appointmentApi.ts";
+} from "../../../libs/enpoints/appointmentApi.ts";
 import {
   AppointmentCreate,
   AppointmentResponse,
