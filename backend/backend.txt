@@ -1,0 +1,35 @@
+Estructura modificada:
+└── backend/
+    ├── Dockerfile  # <- Mayúscula (convención estándar)
+    ├── entrypoint.sh  # [Nuevo] Scripts de inicialización útiles
+    ├── requirements/
+    │   ├── base.txt  # [Nuevo] Dependencias comunes
+    │   ├── dev.txt   # [Nuevo] Desarrollo
+    │   └── prod.txt  # [Nuevo] Producción
+    ├── src/  # [Nuevo] Todo el código fuente aquí
+    │   ├── main.py   # Movido aquí desde raíz
+    │   ├── api/
+    │   │   ├── dependencies.py  # Renombrado deps.py (más descriptivo)
+    │   │   └── v1/
+    │   │       ├── routers/     # Renombrado endpoints/ → routers/ (terminología FastAPI)
+    │   │       │   ├── clients/
+    │   │       │   │   ├── endpoints.py  # [Nuevo] Agrupar por entidad
+    │   │       │   │   └── schemas.py
+    │   │       │   ├── designs/
+    │   │       │   ├── quotes/
+    │   │       │   ├── services/
+    │   │       │   └── users/
+    │   │       └── api.py       # → Renombrado a routes.py o mantener como __init__.py
+    │   ├── core/
+    │   │   ├── config.py
+    │   │   └── security.py
+    │   ├── crud/
+    │   ├── db/
+    │   ├── models/
+    │   ├── schemas/
+    │   ├── services/
+    │   └── utils/  # [Nuevo] Para helpers comunes
+    ├── tests/  # [Nuevo] Fundamental para testing
+    │   ├── unit/
+    │   └── integration/
+    └── .env  # [Nuevo] Variables de entorno
