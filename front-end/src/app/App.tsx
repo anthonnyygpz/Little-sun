@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import useAuth from "./hooks/useAuth";
 import NotFound from "../features/shared/pages/404";
 import {
   ViewAppointment,
@@ -8,61 +10,112 @@ import {
 import { ViewClient, UpdateClient } from "../features/client/";
 import { AddService, ViewService, UpdateService } from "../features/service";
 import { AddDesign, ViewDesign, UpdateDesign } from "../features/design";
-// import EditServices from "../pages/Service/updateService.tsx";
-// import UpdateDesigns from "../pages/Design/updateDesign.tsx";
-// import AddDesigns from "../pages/Design/addDesign.tsx";
-// import NotFound from "../pages/404.tsx";
-// import LoginPage from "../pages/Login/loginPage.tsx";
+import { ViewLogin } from "../features/auth/";
+import { Register } from "../features/user/";
+import { Navigate } from "react-router";
+
+const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated() ? <>{children}</> : <Navigate to={"/login"} />;
+};
 
 const router = createBrowserRouter([
   {
     path: "/GenerateQuote",
-    element: <GenerateAppointment />,
+    element: (
+      <ProtectedRoute>
+        <GenerateAppointment />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/",
-    element: <ViewAppointment />,
+    element: (
+      <ProtectedRoute>
+        <ViewAppointment />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/UpdateQuote/:data",
-    element: <UpdateAppointment />,
+    element: (
+      <ProtectedRoute>
+        <UpdateAppointment />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Clients",
-    element: <ViewClient />,
+    element: (
+      <ProtectedRoute>
+        <ViewClient />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Clients/UpdateClient/:data",
-    element: <UpdateClient />,
+    element: (
+      <ProtectedRoute>
+        <UpdateClient />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Services/AddServices",
-    element: <AddService />,
+    element: (
+      <ProtectedRoute>
+        <AddService />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Services",
-    element: <ViewService />,
+    element: (
+      <ProtectedRoute>
+        <ViewService />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Services/EditServices/:data",
-    element: <UpdateService />,
+    element: (
+      <ProtectedRoute>
+        <UpdateService />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Designs/AddDesigns",
-    element: <AddDesign />,
+    element: (
+      <ProtectedRoute>
+        <AddDesign />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Designs",
-    element: <ViewDesign />,
+    element: (
+      <ProtectedRoute>
+        <ViewDesign />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/Designs/EditDesigns/:data",
-    element: <UpdateDesign />,
+    element: (
+      <ProtectedRoute>
+        <UpdateDesign />
+      </ProtectedRoute>
+    ),
   },
-  // {
-  //   path: "/Login",
-  //   element: <LoginPage />,
-  // },
+  {
+    path: "/Login",
+    element: <ViewLogin />,
+  },
+  {
+    path: "/Register",
+    element: <Register />,
+  },
   {
     path: "*",
     element: <NotFound />,
