@@ -10,7 +10,7 @@ import {
 import { ViewClient, UpdateClient } from "../features/client/";
 import { AddService, ViewService, UpdateService } from "../features/service";
 import { AddDesign, ViewDesign, UpdateDesign } from "../features/design";
-import { ViewLogin } from "../features/auth/";
+import { Login } from "../features/auth/";
 import { Register } from "../features/user/";
 import { Navigate } from "react-router";
 
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Login",
-    element: <ViewLogin />,
+    element: <Login />,
   },
   {
     path: "/Register",
