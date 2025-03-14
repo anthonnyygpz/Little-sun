@@ -10,7 +10,9 @@ export const getAllAppointmentApi = async (): Promise<
   AppointmentResponse[]
 > => {
   try {
-    const response = await apiClient.get<AppointmentResponse[]>("/quotes/all"); // Asegúrate de que la ruta sea correcta
+    const response =
+      await apiClient.get<AppointmentResponse[]>("/appointments/");
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error fetching quotes:", error);
@@ -20,10 +22,10 @@ export const getAllAppointmentApi = async (): Promise<
 
 // Función para crear un nuevo quote (POST)
 export const createAppointmentApi = async (
-  quote: AppointmentCreate,
+  appointment: AppointmentCreate,
 ): Promise<AppointmentResponse> => {
   try {
-    const response = await apiClient.post("/quotes/create", quote); // Asegúrate de que la ruta sea correcta
+    const response = await apiClient.post("/appointments/", appointment);
     return response.data;
   } catch (error) {
     console.error("Error creating quote:", error);
@@ -33,7 +35,7 @@ export const createAppointmentApi = async (
 
 export const updateAppointmentApi = async (quote: AppintmentUpdate) => {
   try {
-    const response = await apiClient.put("/quotes/update", quote);
+    const response = await apiClient.put("/appointments/", quote);
     return response.data;
   } catch (error) {
     console.error("Error creating quote:", error);
@@ -43,7 +45,7 @@ export const updateAppointmentApi = async (quote: AppintmentUpdate) => {
 
 export const deleteAppointmentApi = async (id: number) => {
   try {
-    const response = await apiClient.delete("/quotes/delete?quote_id=" + id);
+    const response = await apiClient.delete("/appointments/" + id);
     return response.data;
   } catch {
     throw new Error("Failded to fetch quotes");
@@ -52,9 +54,7 @@ export const deleteAppointmentApi = async (id: number) => {
 
 export const deleteNailSizeApi = async (id: number) => {
   try {
-    const response = await apiClient.put(
-      "/quotes/delete_sculping?quote_id=" + id,
-    );
+    const response = await apiClient.put("/appointments/" + id);
     return response.data;
   } catch (error) {
     console.error("Error deleting quote:", error);
