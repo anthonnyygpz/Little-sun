@@ -5,7 +5,7 @@ import { useAlert } from "./hooks/useAlertDelete.ts";
 import { AppointmentService } from "../../../appointment";
 import { AppointmentResponse } from "../../types/appointmentTypes.ts";
 
-const TableQuote = () => {
+const TableAppointment = () => {
   const { appointments, loading, error } = AppointmentService();
   const { handleAlertDelete } = useAlert();
 
@@ -43,11 +43,11 @@ const TableQuote = () => {
               icon: "",
             };
             return (
-              <tr key={appointment.quote_id}>
-                <td>{appointment.name}</td>
+              <tr key={appointment.appointment_id}>
+                <td>{appointment.client_name}</td>
                 <td>{appointment.size_name}</td>
-                <td>{appointment.services}</td>
-                <td>{appointment.designs}</td>
+                <td>{appointment.nail_services}</td>
+                <td>{appointment.nail_designs}</td>
                 <td>{appointment.total_amount}</td>
                 <td>{appointment.phone_number}</td>
                 <td>{appointment.created_at}</td>
@@ -70,8 +70,8 @@ const TableQuote = () => {
                       className="delete-button"
                       onClick={() =>
                         handleAlertDelete(
-                          Number(appointment.quote_id),
-                          `${appointment.name}/ ${appointment.size_name}/ ${appointment.services}/ ${appointment.designs}/ ${appointment.total_amount}`,
+                          Number(appointment.appointment_id),
+                          `${appointment.name} / ${appointment.size_name} / ${appointment.nail_services} / ${appointment.nail_designs} / ${appointment.total_amount}`,
                         )
                       }
                     >
@@ -88,4 +88,4 @@ const TableQuote = () => {
   );
 };
 
-export default TableQuote;
+export default TableAppointment;
