@@ -1,6 +1,5 @@
-from fastapi import Depends
-
 from src.api import dependencies
+from fastapi import Depends
 from src.repositories.sculping_nail_size_repository import SculpingNailSizeRepository
 from src.services.sculping_nail_size_service import SculpingNailSizeService
 

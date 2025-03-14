@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 from typing import List, Optional
-from sqlalchemy.orm import Session
 
+from sqlalchemy.orm import Session
 from src.models.nail_service import NailService
-from src.repositories.interfaces import INailServiceRepository
 from src.schemas.nail_service import NailServiceCreate, NailServiceUpdate
+
+from .interfaces import INailServiceRepository
 
 
 @dataclass

@@ -1,7 +1,7 @@
+from src.api import dependencies
 from fastapi import Depends
-from .....api import dependencies
-from .....repositories.auth_repository import AuthRepository
-from .....services.auth_service import AuthService
+from src.repositories.auth_repository import AuthRepository
+from src.services.auth_service import AuthService
 
 
 def get_auth_service(db=Depends(dependencies.get_db)):

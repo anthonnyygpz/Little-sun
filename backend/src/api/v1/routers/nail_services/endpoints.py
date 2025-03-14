@@ -1,7 +1,7 @@
 from typing import List
+
 from fastapi import APIRouter, Depends, status
 from src.api import dependencies
-from src.api.v1.routers.nail_services.dependencies import get_nail_service_service
 from src.models.user import User
 from src.schemas.nail_service import (
     NailServiceCreate,
@@ -9,6 +9,8 @@ from src.schemas.nail_service import (
     NailServiceUpdate,
 )
 from src.services.nail_service_service import NailServiceService
+
+from .dependencies import get_nail_service_service
 
 router = APIRouter()
 

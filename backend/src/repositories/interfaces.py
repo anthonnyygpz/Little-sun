@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from src.models.appointment import Appointment
 from src.models.appointment_design import AppointmentDesign
@@ -15,16 +15,15 @@ from src.schemas.appointment import (
     AppointmentFullUpdate,
     AppointmentResponse,
     AppointmentServiceCreate,
-    AppointmentUpdate,
 )
 from src.schemas.client import ClientCreate, ClientUpdate
 from src.schemas.nail_design import NailDesignCreate, NailDesignUpdate
+from src.schemas.nail_service import NailServiceCreate, NailServiceUpdate
 from src.schemas.sculping_nail_size import (
     SculpingNailSizeCreate,
     SculpingNailSizeUpdate,
 )
 from src.schemas.user import UserCreate
-from src.schemas.nail_service import NailServiceCreate, NailServiceUpdate
 
 
 ### IClient

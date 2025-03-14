@@ -1,8 +1,7 @@
 from fastapi import Depends
-
-from .....repositories.client_repository import ClientRepository
-from .....services.client_service import ClientService
-from .... import dependencies
+from src.api import dependencies
+from src.repositories.client_repository import ClientRepository
+from src.services.client_service import ClientService
 
 
 def get_client_service(db=Depends(dependencies.get_db)):

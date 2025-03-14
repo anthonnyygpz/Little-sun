@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from ..models.client import Client
-from ..repositories.interfaces import IClientRepository
-from ..schemas.client import ClientCreate, ClientUpdate
+from src.models.client import Client
+from src.repositories.interfaces import IClientRepository
+from src.schemas.client import ClientCreate, ClientUpdate
 
 
 @dataclass

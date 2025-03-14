@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from fastapi import HTTPException, status
-
 from src.models.nail_design import NailDesign
 from src.repositories.interfaces import INailDesignRepository
 from src.schemas.nail_design import NailDesignCreate, NailDesignUpdate

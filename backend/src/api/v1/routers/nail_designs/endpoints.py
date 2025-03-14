@@ -1,6 +1,6 @@
 from typing import List
-from fastapi import APIRouter, Depends
 
+from fastapi import APIRouter, Depends
 from src.api import dependencies
 from src.models.user import User
 from src.schemas.nail_design import (
@@ -9,6 +9,7 @@ from src.schemas.nail_design import (
     NailDesignUpdate,
 )
 from src.services.nail_design_service import NailDesignService
+
 from .dependencies import get_nail_design_service
 
 router = APIRouter()

@@ -1,36 +1,36 @@
 services:
-  frontend:
-    container_name: front-end
-    build:
-      context: ./front-end
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    networks:
-      - app-network
-    develop:
-      watch:
-        - action: sync
-          path: ./front-end
-          target: ./front-end/src/
-        - path: ./front-end/package.json
-          action: rebuild
-
-  backend:
-    container_name: backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    environment:
-      - ./backend/.env
-    depends_on:
-      - db
-    networks:
-      - app-network
+  # frontend:
+  #   container_name: front-end
+  #   build:
+  #     context: ./front-end
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - app-network
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./front-end
+  #         target: ./front-end/src/
+  #       - path: ./front-end/package.json
+  #         action: rebuild
+  #
+  # backend:
+  #   container_name: backend
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - ./backend/.env
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - app-network
 
   db:
     container_name: little_sun

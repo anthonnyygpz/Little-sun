@@ -2,13 +2,13 @@ from dataclasses import dataclass
 from typing import List
 
 from sqlalchemy.orm import Session
-
 from src.models.sculping_size import SculpingNailSize
-from src.repositories.interfaces import ISculpingNailSizeRepository
 from src.schemas.sculping_nail_size import (
     SculpingNailSizeCreate,
     SculpingNailSizeUpdate,
 )
+
+from .interfaces import ISculpingNailSizeRepository
 
 
 @dataclass

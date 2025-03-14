@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 from sqlalchemy.orm import Session
 
-from ..models.user import User
-from ..repositories.interfaces import IAuthRepository
+from src.models.user import User
+from .interfaces import IAuthRepository
 
 
 @dataclass

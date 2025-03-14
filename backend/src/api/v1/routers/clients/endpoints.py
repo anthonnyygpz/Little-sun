@@ -1,10 +1,11 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, status
 
+from fastapi import APIRouter, Depends, HTTPException, status
 from src.models.user import User
 from src.schemas.client import ClientCreate, ClientResponse, ClientUpdate
 from src.services.client_service import ClientService
-from .... import dependencies
+
+from src.api import dependencies
 from .dependencies import get_client_service
 
 router = APIRouter()

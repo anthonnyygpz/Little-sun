@@ -2,10 +2,9 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from fastapi import HTTPException, status
-
+from src.models.nail_service import NailService
 from src.repositories.interfaces import INailServiceRepository
 from src.schemas.nail_service import NailServiceCreate, NailServiceUpdate
-from src.models.nail_service import NailService
 
 
 @dataclass

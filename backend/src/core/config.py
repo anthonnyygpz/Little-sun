@@ -3,7 +3,9 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = ""
-    DATABASE_URL: str = ""
+    DATABASE_URL: str = (
+        "postgresql+psycopg2://postgres:antony15@0.0.0.0:5432/little_sun "
+    )
     API_VERSION_STR: str = ""
 
     SECRET_KEY: str = ""

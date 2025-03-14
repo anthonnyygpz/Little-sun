@@ -4,10 +4,10 @@ from typing import List, Optional
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
+from src.models.client import Client
+from src.schemas.client import ClientCreate, ClientUpdate
 
-from ..models.client import Client
-from ..repositories.interfaces import IClientRepository
-from ..schemas.client import ClientCreate, ClientUpdate
+from .interfaces import IClientRepository
 
 
 @dataclass

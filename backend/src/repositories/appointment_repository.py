@@ -3,7 +3,6 @@ from typing import List
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
-
 from src.models.appointment import Appointment
 from src.models.appointment_design import AppointmentDesign
 from src.models.appointment_service import AppointmentService

@@ -1,3 +1,4 @@
+from src.api import dependencies
 from fastapi import Depends
 from src.repositories.appointment_design_repository import AppointmentDesignRepository
 from src.repositories.appointment_repository import AppointmentRepository
@@ -9,8 +10,6 @@ from src.repositories.nail_design_repository import NailDesignRepository
 from src.repositories.nail_service_repository import NailServiceRepository
 from src.repositories.sculping_nail_size_repository import SculpingNailSizeRepository
 from src.services.appointment_service import AppointmentService
-
-from .... import dependencies
 
 
 def get_appointment_service(db=Depends(dependencies.get_db)):

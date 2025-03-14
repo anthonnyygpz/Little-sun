@@ -1,7 +1,6 @@
+from src.db.base import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-
-from ..db.base import Base
 
 
 class NailService(Base):

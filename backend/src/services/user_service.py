@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from ..repositories.interfaces import IUserRepository
-from ..schemas.user import UserCreate
+from src.repositories.interfaces import IUserRepository
+from src.schemas.user import UserCreate
 
 
 @dataclass

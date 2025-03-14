@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
+from src.services.auth_service import AuthService
+from src.services.user_service import UserService
 
-from .....services.auth_service import AuthService
-from .....services.user_service import UserService
 from ..users.dependencies import get_user_service
 from .dependencies import get_auth_service
 

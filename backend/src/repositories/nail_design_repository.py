@@ -4,10 +4,10 @@ from typing import List, Optional
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
-
 from src.models.nail_design import NailDesign
-from src.repositories.interfaces import INailDesignRepository
 from src.schemas.nail_design import NailDesignCreate, NailDesignUpdate
+
+from .interfaces import INailDesignRepository
 
 
 @dataclass

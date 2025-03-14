@@ -1,10 +1,11 @@
 from typing import Generator
-from fastapi import Depends, status, HTTPException
-from sqlalchemy.orm import Session
-from ..db.session import SessionLocal
+
+from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from ..core.security import decode_token
-from ..repositories.user_repository import UserRepository
+from sqlalchemy.orm import Session
+from src.core.security import decode_token
+from src.db.session import SessionLocal
+from src.repositories.user_repository import UserRepository
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 

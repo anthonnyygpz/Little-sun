@@ -8,11 +8,10 @@ from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import jwe
 from jose.constants import ALGORITHMS
-
-from ..core.config import settings
-from ..core.security import create_access_token, verify_password
-from ..repositories.interfaces import IAuthRepository
-from ..schemas.user import UserResponse
+from src.core.config import settings
+from src.core.security import create_access_token, verify_password
+from src.repositories.interfaces import IAuthRepository
+from src.schemas.user import UserResponse
 
 
 @dataclass

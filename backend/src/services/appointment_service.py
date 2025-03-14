@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from ..repositories.interfaces import (
+from src.repositories.interfaces import (
     IAppointmentDeisngRepository,
     IAppointmentRepository,
     IAppointmentServiceRepository,
@@ -10,7 +10,7 @@ from ..repositories.interfaces import (
     INailServiceRepository,
     ISculpingNailSizeRepository,
 )
-from ..schemas.appointment import (
+from src.schemas.appointment import (
     AppointmenDesigntCreate,
     Appointment,
     AppointmentCreate,
@@ -18,7 +18,7 @@ from ..schemas.appointment import (
     AppointmentResponse,
     AppointmentServiceCreate,
 )
-from ..schemas.client import ClientCreate
+from src.schemas.client import ClientCreate
 
 
 @dataclass()

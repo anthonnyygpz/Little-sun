@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, ForeignKey
-
-from ..db.base import Base
+from src.db.base import Base
+from sqlalchemy import Column, ForeignKey, Integer
 
 
 class AppointmentService(Base):

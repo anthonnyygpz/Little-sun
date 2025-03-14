@@ -1,13 +1,12 @@
-from fastapi import APIRouter, Depends, status
-
 from src.api import dependencies
+from fastapi import APIRouter, Depends, status
 from src.models.user import User
-
-from .....schemas.appointment import (
+from src.schemas.appointment import (
     Appointment,
     AppointmentFullUpdate,
     AppointmentResponse,
 )
+
 from .dependencies import AppointmentService, get_appointment_service
 
 router = APIRouter()

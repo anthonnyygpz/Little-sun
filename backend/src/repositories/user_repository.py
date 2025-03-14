@@ -3,12 +3,11 @@ from dataclasses import dataclass
 from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
+from src.core.security import get_password_hash
+from src.models.user import User
+from src.schemas.user import UserCreate
 
-from ..core.security import get_password_hash
-
-from ..models.user import User
-from ..repositories.interfaces import IUserRepository
-from ..schemas.user import UserCreate
+from .interfaces import IUserRepository
 
 
 @dataclass

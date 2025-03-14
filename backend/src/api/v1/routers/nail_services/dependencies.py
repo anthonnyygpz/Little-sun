@@ -1,5 +1,4 @@
 from fastapi import Depends
-
 from src.api import dependencies
 from src.repositories.nail_service_repository import NailServiceRepository
 from src.services.nail_service_service import NailServiceService

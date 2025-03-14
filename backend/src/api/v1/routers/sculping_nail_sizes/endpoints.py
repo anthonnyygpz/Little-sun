@@ -5,10 +5,11 @@ from src.schemas.sculping_nail_size import (
     SculpingNailSizeCreate,
     SculpingNailSizeUpdate,
 )
-from src.api.v1.routers.sculping_nail_sizes.dependencies import (
+from src.services.sculping_nail_size_service import SculpingNailSizeService
+
+from .dependencies import (
     get_sculping_nail_size_service,
 )
-from src.services.sculping_nail_size_service import SculpingNailSizeService
 
 router = APIRouter()
 

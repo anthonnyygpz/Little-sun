@@ -1,11 +1,10 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List
+
 from sqlalchemy.orm import Session
+from src.models.appointment_service import AppointmentService
+from src.schemas.appointment import AppointmentServiceCreate
 
-from src.schemas.quote_service import AppointmentServiceResponse
-
-from ..models.appointment_service import AppointmentService
-from ..schemas.appointment import AppointmentServiceCreate
 from .interfaces import IAppointmentServiceRepository
 
 

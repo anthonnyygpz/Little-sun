@@ -10,7 +10,7 @@ from .api.v1.routers.sculping_nail_sizes.endpoints import router as sculpign_nai
 from .api.v1.routers.users.endpoints import router as user_router
 from .core.config import settings
 
-app = FastAPI(title=settings.PROJECT_NAME)
+app = FastAPI(title="Little Sun")
 api_version = settings.API_VERSION_STR
 
 app.add_middleware(
