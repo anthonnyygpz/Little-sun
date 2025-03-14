@@ -1,12 +1,12 @@
 export interface Appointment {
-  quote_id: number;
+  appointment_id: number;
   client_id?: number;
   nail_size_id?: number;
-  name?: string;
+  client_name?: string;
   phone_number?: number;
   total_amount?: number;
-  designs?: number[];
-  services?: number[];
+  nail_designs?: number[];
+  nail_services?: number[];
   status: string;
 }
 
