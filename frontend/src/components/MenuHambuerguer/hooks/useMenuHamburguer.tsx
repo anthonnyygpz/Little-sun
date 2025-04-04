@@ -30,7 +30,7 @@ export const useMenuHamburguer = () => {
         {
           title: "Clientes",
           icon: <User className="w-5 h-5 mr-3" />,
-          route: "/Clients",
+          route: ROUTE_PATHS.CLIENT,
         },
       ],
     },
@@ -40,7 +40,7 @@ export const useMenuHamburguer = () => {
         {
           title: "Servicios",
           icon: <DraftingCompass className="w-5 h-5 mr-3" />,
-          route: "/Services",
+          route: ROUTE_PATHS.NAIL_SERVICE,
         },
         {
           title: "Crear Servicio",
@@ -55,7 +55,7 @@ export const useMenuHamburguer = () => {
         {
           title: "Diseños",
           icon: <Palette className="w-5 h-5 mr-3" />,
-          route: "/Designs",
+          route: ROUTE_PATHS.NAIL_DESIGN,
         },
         {
           title: "Crear Diseño",

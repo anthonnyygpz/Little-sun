@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NailDesign, SelectedIdsDesign } from "../../../types/nailDesign.types";
 import { nailDesignService } from "../../../api/nailDesignService";
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
@@ -58,11 +58,11 @@ export const useCardNailDesign = ({ onChange }: useCardNailDesignProps) => {
 
   // Api
   // Listado de diseño de uñas
-  const listNailDesign = async () => {
+  const listNailDesign = useCallback(async () => {
     setLoading(true);
     if (isAuthenticated && token) {
       try {
-        const data = await nailDesignService.listNailService(token);
+        const data = await nailDesignService.listNailDesign(token);
         setNailDesigns(data);
       } catch (error) {
         console.error(error);
@@ -71,11 +71,11 @@ export const useCardNailDesign = ({ onChange }: useCardNailDesignProps) => {
         setLoading(false);
       }
     }
-  };
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     listNailDesign();
-  }, [isAuthenticated, token]);
+  }, [listNailDesign]);
 
   return {
     nailDesigns,

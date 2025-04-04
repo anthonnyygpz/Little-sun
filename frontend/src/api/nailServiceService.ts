@@ -19,4 +19,16 @@ export const nailServiceService = {
       throw new Error("Error to list nail service.");
     }
   },
+  deleteNailService: async (token: string, id: number) => {
+    try {
+      const response = await apiService.delete(
+        API_CONFIG.ENDPOINTS.NAIL_SERVICE + id,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error to delete nail service.");
+    }
+  },
 };

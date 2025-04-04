@@ -3,7 +3,7 @@ import { apiService } from "./apiService";
 import { NailDesign } from "../types/nailDesign.types";
 
 export const nailDesignService = {
-  listNailService: async (
+  listNailDesign: async (
     token: string,
     skip: number = 0,
     limit: number = 100,
@@ -16,6 +16,18 @@ export const nailDesignService = {
       return response.data;
     } catch (error) {
       console.error("Error to list nail design: ", error);
+      throw new Error("Error to list nail design");
+    }
+  },
+  deleteNailDesign: async (token: string, id: number) => {
+    try {
+      const response = await apiService.delete(
+        API_CONFIG.ENDPOINTS.NAIL_DESIGN + id,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error to delete nail design", error);
       throw new Error("Error to list nail design");
     }
   },

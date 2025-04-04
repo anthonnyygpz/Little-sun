@@ -41,7 +41,7 @@ export const useGenerateAppointment = () => {
         console.error("Error intentar crear la cita: ", error);
       }
     },
-    [formData, isAuthenticated, token],
+    [formData, navigate, isAuthenticated, token],
   );
 
   const handleUncheckAll = useCallback(() => {
@@ -82,9 +82,6 @@ export const useGenerateAppointment = () => {
 
     return total;
   }, [formData]);
-
-  // Apis
-  // Crear cita
 
   return {
     handleSubmit,

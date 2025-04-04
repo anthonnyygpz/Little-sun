@@ -19,9 +19,11 @@ export const useTableAppointment = () => {
   const toggleRow = (id: number) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
+  const nextPage = () => console.log("Siguente pagina");
+  const prevPage = () => console.log("Anterior pagina");
 
   // Apis
-  const listAppointment = async () => {
+  const listAppointment = useCallback(async () => {
     if (isAuthenticated && token) {
       try {
         const data = await appointmentService.listAppointment(token);
@@ -33,7 +35,7 @@ export const useTableAppointment = () => {
         setLoadingLisAppointment(false);
       }
     }
-  };
+  }, [isAuthenticated, token]);
 
   const deleteAppointment = useCallback(
     async (id: number) => {
@@ -51,12 +53,12 @@ export const useTableAppointment = () => {
       }
     },
 
-    [appointments, isAuthenticated, token],
+    [listAppointment, isAuthenticated, token],
   );
 
   useEffect(() => {
     listAppointment();
-  }, [isAuthenticated, token]);
+  }, [listAppointment]);
 
   return {
     expandedRow,
@@ -65,5 +67,7 @@ export const useTableAppointment = () => {
     loadingLisAppointment,
     toggleRow,
     deleteAppointment,
+    nextPage,
+    prevPage,
   };
 };

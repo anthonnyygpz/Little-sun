@@ -10,6 +10,9 @@ import { CreateAppointmentPage } from "./pages/appointments/CreateAppointment";
 import { PublicRoute } from "./routes/PublicRoute";
 import { RegisterPage } from "./pages/auth/RegisterPage";
 import { ToastContainer } from "react-toastify";
+import { ViewClient } from "./pages/clients/ViewClient";
+import { ViewNailService } from "./pages/nailService/ViewNailService";
+import { ViewNailDesign } from "./pages/nailDesign/ViewNailDesign";
 
 export const App = () => {
   return (
@@ -33,6 +36,16 @@ export const App = () => {
               <Route
                 path={ROUTE_PATHS.CREATE_APPOINTMENT}
                 element={<CreateAppointmentPage />}
+              />
+              <Route path={ROUTE_PATHS.CLIENT} element={<ViewClient />} />
+              <Route
+                path={ROUTE_PATHS.NAIL_SERVICE}
+                element={<ViewNailService />}
+              />
+              <Route path={ROUTE_PATHS.CLIENT} element={<ViewClient />} />
+              <Route
+                path={ROUTE_PATHS.NAIL_DESIGN}
+                element={<ViewNailDesign />}
               />
             </Route>
 

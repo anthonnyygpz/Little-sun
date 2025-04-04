@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify/unstyled";
 import { MainLayout } from "../../components/layouts/MainLayout/MainLayout";
 import { MobilTableAppointment } from "../../feactures/Appointment/components/MobilTableAppointment";
 import { TableAppointment } from "../../feactures/Appointment/components/TableAppointment";
@@ -11,6 +12,8 @@ export const AppointmentPage = () => {
         </div>
         <MobilTableAppointment />
       </div>
+
+      <ToastContainer />
     </MainLayout>
   );
 };

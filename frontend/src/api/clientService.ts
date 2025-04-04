@@ -14,4 +14,19 @@ export const clientService = {
       throw new Error("Faild to list client: ");
     }
   },
+  deleteClient: async (token: string, id: number) => {
+    try {
+      const response = await apiService.delete(
+        API_CONFIG.ENDPOINTS.CLIENTS + id,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error("Error to delete client: ", error);
+      throw new Error("Faild to delete client: ");
+    }
+  },
 };

@@ -35,6 +35,7 @@ export const MobilTableAppointment = () => {
       icon: <Ban />,
     },
   };
+  console.log(appointments);
 
   return (
     <div className="md:hidden">
@@ -193,6 +194,7 @@ export const MobilTableAppointment = () => {
           );
         })}
       </ul>
+      <ToastContainer />
     </div>
   );
 };

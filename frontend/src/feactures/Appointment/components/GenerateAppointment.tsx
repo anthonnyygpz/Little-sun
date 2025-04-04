@@ -7,6 +7,9 @@ import { CardDateAndTime } from "../../../components/CardDateAndTime/CardDateAnd
 import { Title } from "../../../components/common/Title";
 import { SubTitle } from "../../../components/common/SubTitle";
 import { Label } from "../../../components/common/Label";
+import { Button } from "../../../components/common/Button";
+import { ChevronLeft } from "lucide-react";
+import { ROUTE_PATHS } from "../../../constants/routes";
 
 export const GenerateAppointment = () => {
   const {
@@ -22,7 +25,15 @@ export const GenerateAppointment = () => {
       <div className="min-h-screen bg-white">
         {/* Main Content */}
         <div className="mx-auto max-w-6xl p-6">
-          <Title>Reservar Cita</Title>
+          <div className="flex items-center gap-1">
+            <Button
+              href={ROUTE_PATHS.APPOINTMENTS}
+              className="mb-8 rounded-full bg-purple-400 p-1 text-white transition-colors hover:bg-purple-500 active:bg-purple-200 active:text-purple-400"
+            >
+              <ChevronLeft />
+            </Button>
+            <Title>Reservar Cita</Title>
+          </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             <div>
@@ -80,7 +91,7 @@ export const GenerateAppointment = () => {
           <div className="mt-8">
             <div className="rounded-lg bg-gray-50 p-6 shadow-sm">
               <div className="mb-4 flex flex-wrap items-center justify-between border-b border-gray-200 pb-4">
-                <SubTitle className="border-none mb-0 pb-0">
+                <SubTitle className="mb-0 border-none pb-0">
                   Resumen de la Cita
                 </SubTitle>
                 <div className="flex items-center rounded-full bg-purple-100 px-4 py-2">
