@@ -1,8 +1,8 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, status
+from src.schemas.user import UserResponse
 from src.api import dependencies
-from src.models.user import User
 from src.schemas.nail_service import (
     NailServiceCreate,
     NailServiceResponse,
@@ -21,9 +21,11 @@ router = APIRouter()
 async def create(
     nail_service_in: NailServiceCreate,
     nail_service_service: NailServiceService = Depends(get_nail_service_service),
-    current_user: User = Depends(dependencies.get_current_user),
+    current_user: UserResponse = Depends(dependencies.get_current_user),
 ):
-    return await nail_service_service.create_nail_service(nail_service_in)
+    return await nail_service_service.create_nail_service(
+        user_id=current_user.user_id, nail_service_in=nail_service_in
+    )
 
 
 @router.get("/", response_model=List[NailServiceResponse])
@@ -31,18 +33,22 @@ async def get_all(
     skip: int = 0,
     limit: int = 100,
     nail_service_service: NailServiceService = Depends(get_nail_service_service),
-    current_user: User = Depends(dependencies.get_current_user),
+    current_user: UserResponse = Depends(dependencies.get_current_user),
 ):
-    return await nail_service_service.get_all_nail_service(skip=skip, limit=limit)
+    return await nail_service_service.get_all_nail_service(
+        user_id=current_user.user_id, skip=skip, limit=limit
+    )
 
 
 @router.get("/by-name")
 async def get_by_name(
     name_in: str,
     nail_service_service: NailServiceService = Depends(get_nail_service_service),
-    current_user: User = Depends(dependencies.get_current_user),
+    current_user: UserResponse = Depends(dependencies.get_current_user),
 ):
-    return await nail_service_service.get_nail_service_by_name(name_in)
+    return await nail_service_service.get_nail_service_by_name(
+        user_id=current_user.user_id, name_in=name_in
+    )
 
 
 @router.put("/{nail_service_id}")
@@ -50,10 +56,12 @@ async def update(
     nail_service_id: int,
     nail_service_in: NailServiceUpdate,
     nail_service_service: NailServiceService = Depends(get_nail_service_service),
-    current_user: User = Depends(dependencies.get_current_user),
+    current_user: UserResponse = Depends(dependencies.get_current_user),
 ):
     return await nail_service_service.update_nail_service(
-        nail_service_id=nail_service_id, nail_service_in=nail_service_in
+        user_id=current_user.user_id,
+        nail_service_id=nail_service_id,
+        nail_service_in=nail_service_in,
     )
 
 
@@ -61,6 +69,6 @@ async def update(
 async def delete(
     nail_service_id: int,
     nail_service_service: NailServiceService = Depends(get_nail_service_service),
-    current_user: User = Depends(dependencies.get_current_user),
+    current_user: UserResponse = Depends(dependencies.get_current_user),
 ):
     return await nail_service_service.delete_nail_service(nail_service_id)

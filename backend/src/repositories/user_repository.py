@@ -34,3 +34,6 @@ class UserRepository(IUserRepository):
 
     async def get_by_email(self, email: str) -> User:
         return self.db.query(User).filter_by(email=email).first()
+
+    async def get_by_id(self, user_id: int) -> User:
+        return self.db.query(User).filter_by(user_id=user_id).first()

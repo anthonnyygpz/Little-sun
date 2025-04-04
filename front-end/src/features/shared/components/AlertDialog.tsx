@@ -37,7 +37,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
       }
     });
   };
-  return <Button text="Eliminar" onClick={() => handleAlertDelete()} />;
+  return <Button onClick={() => handleAlertDelete()}>Eliminar</Button>;
 };
 
 export default AlertDialog;

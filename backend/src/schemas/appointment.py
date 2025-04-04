@@ -7,33 +7,25 @@ from pydantic import BaseModel, Field
 class AppointmentBase(BaseModel):
     client_name: str = Field(..., min_length=2, max_length=100)
     phone_number: str | None = None
-    designs: List[int] = Field(default_factory=List)
-    services: List[int] = Field(default_factory=List)
     nail_size_id: int | None = None
+    nail_designs: Optional[List[int]]
+    nail_services: Optional[List[int]]
+    date_appointment: str
+    appointment_time: str
 
 
-class Appointment(AppointmentBase):
+class AppointmentFullCreate(AppointmentBase):
     pass
-    # @field_validator("designs", "services")
-    # def validate_ids(cls, v):
-    #     if any(id <= 0 for id in v):
-    #         raise ValueError("IDs must be positive integers")
-    #     return v
-
-
-class AppointmentServiceCreate(BaseModel):
-    appointment_id: int
-    service_id: int
-
-
-class AppointmenDesigntCreate(BaseModel):
-    appointment_id: int
-    design_id: int
 
 
 class AppointmentCreate(BaseModel):
     client_id: int
+    user_id: int
     nail_size_id: int | None = None
+    nail_designs: Optional[List[int]]
+    nail_services: Optional[List[int]]
+    date_appointment: str
+    appointment_time: str
 
 
 class AppointmentUpdate(BaseModel):
@@ -55,6 +47,7 @@ class AppointmentFullUpdate(BaseModel):
 
 class AppointmentResponse(BaseModel):
     appointment_id: int
+    user_id: int
     client_id: int
     nail_size_id: int
     client_name: str

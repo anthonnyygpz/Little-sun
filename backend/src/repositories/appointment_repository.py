@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
+from src.models.user import User
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 from src.models.appointment import Appointment
@@ -13,7 +14,6 @@ from src.models.sculping_size import SculpingNailSize
 from src.schemas.appointment import (
     AppointmentCreate,
     AppointmentFullUpdate,
-    AppointmentResponse,
     AppointmentUpdate,
 )
 from src.schemas.client import ClientUpdate
@@ -25,12 +25,18 @@ from .interfaces import IAppointmentRepository
 class AppointmentRepository(IAppointmentRepository):
     db: Session
 
-    async def create_appointment(self, appointment_in: AppointmentCreate):
+    async def create_appointment(self, user_id: int, appointment_in: AppointmentCreate):
         appointment_data = {}
         if appointment_in.client_id != 0:
             appointment_data["client_id"] = appointment_in.client_id
+        if user_id != 0:
+            appointment_data["user_id"] = user_id
         if appointment_in.nail_size_id != 0:
             appointment_data["nail_size_id"] = appointment_in.nail_size_id
+        if appointment_in.date_appointment != "":
+            appointment_data["date_appointment"] = appointment_in.date_appointment
+        if appointment_in.appointment_time != "":
+            appointment_data["appointment_time"] = appointment_in.appointment_time
 
         db_appointment = Appointment(**appointment_data)
         self.db.add(db_appointment)
@@ -38,7 +44,7 @@ class AppointmentRepository(IAppointmentRepository):
         self.db.refresh(db_appointment)
         return db_appointment
 
-    async def get_all_appointments(self) -> List[tuple]:
+    async def get_all_appointments(self, user_id: int) -> List[tuple]:
         try:
             # Subconsultas para calcular totales individuales
             services_total = (
@@ -64,6 +70,7 @@ class AppointmentRepository(IAppointmentRepository):
             query = (
                 select(
                     Appointment.appointment_id,
+                    User.user_id,
                     Client.name.label("client_name"),
                     Client.phone_number,
                     Client.client_id,
@@ -82,6 +89,7 @@ class AppointmentRepository(IAppointmentRepository):
                     ).label("total_amount"),
                 )
                 .select_from(Appointment)
+                .outerjoin(User, Appointment.user_id == User.user_id)
                 .outerjoin(Client, Appointment.client_id == Client.client_id)
                 .outerjoin(
                     SculpingNailSize,
@@ -100,6 +108,7 @@ class AppointmentRepository(IAppointmentRepository):
                 .outerjoin(AppointmentDesign)
                 .outerjoin(NailDesign)
                 .group_by(
+                    User.user_id,
                     Appointment.appointment_id,
                     Client.client_id,
                     SculpingNailSize.size_id,
@@ -108,6 +117,7 @@ class AppointmentRepository(IAppointmentRepository):
                     Appointment.status,
                     Appointment.created_at,
                 )
+                .where(User.user_id == user_id)
                 .order_by(Appointment.created_at.desc())
             )
 

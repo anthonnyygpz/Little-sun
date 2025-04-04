@@ -3,7 +3,7 @@ from typing import List
 
 from .interfaces import IAppointmentDeisngRepository
 from src.models.appointment_design import AppointmentDesign
-from src.schemas.appointment import AppointmenDesigntCreate
+from src.schemas.appointment_design import AppointmenDesigntCreate
 from sqlalchemy.orm import Session
 
 
@@ -15,7 +15,8 @@ class AppointmentDesignRepository(IAppointmentDeisngRepository):
         self, appointment_in: AppointmenDesigntCreate
     ) -> AppointmentDesign:
         db_appointment_design = AppointmentDesign(
-            quote_id=appointment_in.appointment_id, design_id=appointment_in.design_id
+            appointment_id=appointment_in.appointment_id,
+            design_id=appointment_in.design_id,
         )
         self.db.add(db_appointment_design)
         self.db.commit()

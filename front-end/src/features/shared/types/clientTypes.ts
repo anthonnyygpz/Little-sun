@@ -5,8 +5,9 @@ export interface Client {
 
 export type ClientCreate = Client;
 
-export interface ClientUpdate extends Client {
-  client_id: number;
+export interface ClientUpdate {
+  name?: string;
+  phone_number?: string;
 }
 
 export interface ClientResponse extends Client {

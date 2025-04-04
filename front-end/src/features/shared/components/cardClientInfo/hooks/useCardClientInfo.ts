@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { ClientResponse } from "../../../types/clientTypes.ts";
 import { ClientService } from "../../../../client";
 
@@ -53,6 +53,18 @@ export const useClientInfo = ({ onChange }: UseClientInfoProps) => {
     },
     [clientInfo, onChange],
   );
+
+  const handleClickOutside = () => {
+    setShowSuggestions(false);
+  };
+
+  useEffect(() => {
+    handleClickOutside();
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return {
     clientInfo,

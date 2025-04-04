@@ -12,7 +12,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   type,
   placeholder,
-  labelText: label_text,
+  labelText,
   id,
   name,
   inputRequired: input_required = false,
@@ -20,19 +20,17 @@ const Input: React.FC<InputProps> = ({
   onChange,
 }) => {
   return (
-    <div className="input-group">
-      <label htmlFor={id}>{label_text}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        id={id}
-        name={name}
-        required={input_required}
-        value={value}
-        onChange={onChange}
-        autoComplete="off"
-      />
-    </div>
+    <input
+      type={type}
+      placeholder={placeholder}
+      id={id}
+      name={name}
+      required={input_required}
+      value={value}
+      onChange={onChange}
+      autoComplete="off"
+      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router";
-import UserService from "../services/userService";
+import UserService from "../services/useService";
 import { useNavigate } from "react-router";
 
 const Register = () => {

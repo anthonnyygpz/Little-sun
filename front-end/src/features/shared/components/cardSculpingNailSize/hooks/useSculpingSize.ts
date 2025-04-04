@@ -13,8 +13,9 @@ export const useSculpingSize = ({
   onChange,
   handleDelete,
 }: useSculpingNailSizeProps) => {
+  const { sculpingSizes, loading, error, getAllSculpingSize } =
+    SculpingNailSizeService();
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const { sculpingSizes, loading, error } = SculpingNailSizeService();
 
   const handleOptionChange = (data: {
     selectedValue: string;
@@ -41,8 +42,10 @@ export const useSculpingSize = ({
     loading,
     error,
     handleOptionChange,
+    SculpingNailSizeService,
     handleUncheckAll,
     handleIsDelete,
     selectedOption,
+    getAllSculpingSize,
   };
 };

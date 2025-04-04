@@ -1,48 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { AppointmentService } from "../";
-import { ClientService } from "../../client/";
-import { AppointmentServiceService } from "../../service";
-import { AppointmentDesignService } from "../../design";
 import { FormEvent } from "react";
 import { FormData } from "../../shared/types/formDataTypes.ts";
+import Swal from "sweetalert2";
 
 const useFormSubmitAppointment = (formData: FormData) => {
   const { addAppointment } = AppointmentService();
-  const { getByNameClient, addClient } = ClientService();
-  const { addAppointmentService } = AppointmentServiceService();
-  const { addAppointmentDesign } = AppointmentDesignService();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (formData) {
-      let clientId = 0;
-      let quoteId = 0;
-      const getClientIfExists = await getByNameClient(formData.clientInfo.name);
-
-      if (getClientIfExists) {
-        clientId = getClientIfExists["client_id"];
-      } else {
-        const createClient = await addClient({
-          name: formData.clientInfo.name,
-          phone_number: formData.clientInfo.phone,
-        });
-        clientId = createClient?.client_id || 0;
-      }
-
-      const createQuotes = await addAppointment({
-        client_id: clientId,
-        nail_size_id: formData.nailSize.id,
-        total_amount: formData.totalPrice,
+    if (!formData.clientInfo.name) {
+      alert("Falta datos por rellenar");
+      Swal.fire({
+        icon: "error",
+        title: "Faltan datos por rellenar.",
       });
-      quoteId = createQuotes?.quote_id || 0;
-      for (const id of formData.services.options) {
-        await addAppointmentService({ quote_id: quoteId, service_id: id });
-      }
-
-      for (const id of formData.designs.options) {
-        await addAppointmentDesign({ quote_id: quoteId, design_id: id });
-      }
+      return;
+    }
+    if (formData) {
+      await addAppointment({
+        client_name: formData.clientInfo.name,
+        nail_size_id: formData.nailSize.id,
+        phone_number: String(formData.clientInfo.phone),
+        nail_designs: formData.designs.options,
+        nail_services: formData.services.options,
+        user_id: 1,
+      });
       navigate("/");
     }
   };

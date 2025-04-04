@@ -9,7 +9,7 @@ import {
 } from "../features/appointment";
 import { ViewClient, UpdateClient } from "../features/client/";
 import { AddService, ViewService, UpdateService } from "../features/service";
-import { AddDesign, ViewDesign, UpdateDesign } from "../features/design";
+import { AddNailDesign, ViewDesign, UpdateDesign } from "../features/design";
 import { Login } from "../features/auth/";
 import { Register } from "../features/user/";
 import { Navigate } from "react-router";
@@ -21,7 +21,7 @@ const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const router = createBrowserRouter([
   {
-    path: "/GenerateQuote",
+    path: "/generate-appointment",
     element: (
       <ProtectedRoute>
         <GenerateAppointment />
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
     path: "/Designs/AddDesigns",
     element: (
       <ProtectedRoute>
-        <AddDesign />
+        <AddNailDesign />
       </ProtectedRoute>
     ),
   },

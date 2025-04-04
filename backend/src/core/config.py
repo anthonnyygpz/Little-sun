@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     API_VERSION_STR: str = ""
 
     SECRET_KEY: str = ""
+    REFRESH_TOKEN_SECRET: str = ""
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRATION_MINUTES: int = 30
 

@@ -1,5 +1,5 @@
 from src.db.base import Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, null
 from sqlalchemy.orm import relationship
 
 
@@ -9,6 +9,7 @@ class NailService(Base):
     service_id = Column(Integer, primary_key=True, autoincrement=True)
     service_name = Column(String, nullable=False)
     base_price = Column(Integer, nullable=False)
+    user_id = Column(Integer, nullable=False)
 
     appointment = relationship(
         "Appointment", secondary="appointment_services", back_populates="nail_service"

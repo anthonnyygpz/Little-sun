@@ -1,8 +1,8 @@
-import Card from "../card.tsx";
-import Label from "../label.tsx";
-import SubTitle from "../subTitle.tsx";
+import { X } from "lucide-react";
 
 interface FormDataProps {
+  isModalOpen: boolean;
+  setIsModalOpen: boolean;
   formData: {
     clientInfo: {
       name: string;
@@ -31,52 +31,25 @@ interface FormDataProps {
   };
 }
 
-const CardResume: React.FC<FormDataProps> = ({ formData }) => {
+const CardResume: React.FC<FormDataProps> = ({
+  formData,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
   const { clientInfo, nailSize, services, designs, totalPrice } = formData;
 
   return (
-    <Card>
-      <SubTitle title="Resumen" />
-      <div className="wrapper label-between">
-        <Label text="Nombre del cliente:" />
-        <Label className="label" text={clientInfo.name} />
+    <div className="fixed inset-0 bg-black/500 flex items-center justify-center z-500 p-4">
+      <div className="relative w-full max-w-md animate-in fade-in zoom-in duration-300">
+        <div className="w-full shadow-lg">
+          <div className="bg-primary/5 relative">
+            <button type="button" onClick={() => setIsModalOpen(false)}>
+              <X />
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="wrapper label-between">
-        <Label text="Numero de telefono del cliente:" />
-        <Label className="label" text={`${clientInfo.phone}`} />
-      </div>
-      <div className="wrapper label-between">
-        <Label text="Tamaño de esculpido:" />
-        <Label className="label" text={nailSize.selectedValue} />
-      </div>
-
-      <Label text="Servicios seleccionados:" />
-      {services.services && services.services.length > 0
-        ? services.services.map((service, index) => (
-            <div key={index} className="wrapper label-between">
-              <Label text={service.name} />
-              <Label className="label" text={`$${service.price}`} />
-            </div>
-          ))
-        : ""}
-
-      <div className="divider"></div>
-      <Label text="Diseños seleccionados:" />
-      {designs.designs && designs.designs.length > 0
-        ? designs.designs.map((design, index) => (
-            <div key={index} className="wrapper label-between">
-              <Label text={`Diseño ${design.name}`} />
-              <Label className="label" text={`$${design.price}`} />
-            </div>
-          ))
-        : ""}
-
-      <div className="divider"></div>
-      <div className="wrapper label-between">
-        <Label text="Total:" />
-        <Label className="label" text={`$${totalPrice}`} />
-      </div>
-    </Card>
+    </div>
   );
 };
 

@@ -1,14 +1,14 @@
-export interface Design {
+export interface NailDesign {
   design_name: string;
-  price: number;
+  base_price: number;
 }
 
-export type DesignCreate = Design;
+export type NailDesignCreate = NailDesign;
 
-export interface DesignUpdate extends Design {
+export interface NailDesignUpdate extends NailDesign {
   design_id: number;
 }
 
-export interface DesignResponse extends Design {
+export interface NailDesignResponse extends NailDesign {
   design_id: number;
 }

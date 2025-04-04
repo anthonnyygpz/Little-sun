@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class SculpingNailSizeBase(BaseModel):
     size_name: str
     base_price: int
+    user_id: int
 
 
 class SculpingNailSizeCreate(SculpingNailSizeBase):

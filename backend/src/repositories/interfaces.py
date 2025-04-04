@@ -4,23 +4,29 @@ from typing import List, Optional
 from src.models.appointment import Appointment
 from src.models.appointment_design import AppointmentDesign
 from src.models.appointment_service import AppointmentService
-from src.models.client import Client
 from src.models.nail_design import NailDesign
-from src.models.nail_service import NailService
-from src.models.sculping_size import SculpingNailSize
 from src.models.user import User
 from src.schemas.appointment import (
-    AppointmenDesigntCreate,
     AppointmentCreate,
     AppointmentFullUpdate,
     AppointmentResponse,
-    AppointmentServiceCreate,
 )
-from src.schemas.client import ClientCreate, ClientUpdate
-from src.schemas.nail_design import NailDesignCreate, NailDesignUpdate
-from src.schemas.nail_service import NailServiceCreate, NailServiceUpdate
+from src.schemas.appointment_design import AppointmenDesigntCreate
+from src.schemas.appointment_service import AppointmentServiceCreate
+from src.schemas.client import ClientCreate, ClientResponse, ClientUpdate
+from src.schemas.nail_design import (
+    NailDesignCreate,
+    NailDesignResponse,
+    NailDesignUpdate,
+)
+from src.schemas.nail_service import (
+    NailServiceCreate,
+    NailServiceResponse,
+    NailServiceUpdate,
+)
 from src.schemas.sculping_nail_size import (
     SculpingNailSizeCreate,
+    SculpingNailSizeResponse,
     SculpingNailSizeUpdate,
 )
 from src.schemas.user import UserCreate
@@ -29,21 +35,27 @@ from src.schemas.user import UserCreate
 ### IClient
 class IClientRepository(ABC):
     @abstractmethod
-    async def create_client(self, client_in: ClientCreate) -> Client:
+    async def create_client(
+        self, user_id: int, client_in: ClientCreate
+    ) -> ClientResponse:
         pass
 
     @abstractmethod
-    async def get_client_all(self, skip: int = 0, limit: int = 100) -> List[Client]:
+    async def get_client_all(
+        self, user_id: int, skip: int = 0, limit: int = 100
+    ) -> List[ClientResponse]:
         pass
 
     @abstractmethod
-    async def get_client_by_name(self, name: str) -> Optional[Client]:
+    async def get_client_by_name(
+        self, user_id: int, name: str
+    ) -> Optional[ClientResponse]:
         pass
 
     @abstractmethod
     async def update_client(
         self, client_id: int, client_in: ClientUpdate
-    ) -> Optional[Client]:
+    ) -> Optional[ClientResponse]:
         pass
 
     @abstractmethod
@@ -55,12 +67,12 @@ class IClientRepository(ABC):
 class IAppointmentRepository(ABC):
     @abstractmethod
     async def create_appointment(
-        self, appointment_in: AppointmentCreate
+        self, user_id: int, appointment_in: AppointmentCreate
     ) -> AppointmentResponse:
         pass
 
     @abstractmethod
-    async def get_all_appointments(self) -> List[tuple]:
+    async def get_all_appointments(self, user_id: int) -> List[tuple]:
         pass
 
     @abstractmethod
@@ -143,19 +155,27 @@ class IUserRepository(ABC):
 ### INailDesign
 class INailDesignRepository(ABC):
     @abstractmethod
-    async def create_nail_design(self, nail_design_in: NailDesignCreate) -> NailDesign:
+    async def create_nail_design(
+        self, nail_design_in: NailDesignCreate
+    ) -> NailDesignResponse:
         pass
 
     @abstractmethod
-    async def get_all_nail_design(self) -> Optional[List[NailDesign]]:
+    async def get_all_nail_design(
+        self, user_id: int, skip: int, limit: int
+    ) -> List[NailDesignResponse]:
         pass
 
     @abstractmethod
-    async def get_nail_design_by_name(self, name_in: str) -> Optional[NailDesign]:
+    async def get_nail_design_by_name(
+        self, user_id: int, name_in: str
+    ) -> Optional[NailDesignResponse]:
         pass
 
     @abstractmethod
-    async def get_nail_design_by_id(self, nail_design_id: int) -> Optional[NailDesign]:
+    async def get_nail_design_by_id(
+        self, user_id: int, nail_design_id: int
+    ) -> Optional[NailDesignResponse]:
         pass
 
     @abstractmethod
@@ -173,28 +193,32 @@ class INailDesignRepository(ABC):
 class INailServiceRepository(ABC):
     @abstractmethod
     async def create_nail_service(
-        self, nail_service_in: NailServiceCreate
-    ) -> NailService:
+        self, user_id: int, nail_service_in: NailServiceCreate
+    ) -> NailServiceResponse:
         pass
 
     @abstractmethod
-    async def get_all_nail_service(self, skip: int, limit: int) -> List[NailService]:
+    async def get_all_nail_service(
+        self, user_id: int, skip: int, limit: int
+    ) -> List[NailServiceResponse]:
         pass
 
     @abstractmethod
-    async def get_nail_service_by_name(self, name_in: str) -> Optional[NailService]:
+    async def get_nail_service_by_name(
+        self, user_id: int, name_in: str
+    ) -> Optional[NailServiceResponse]:
         pass
 
     @abstractmethod
     async def get_nail_service_by_id(
-        self, nail_service_id: int
-    ) -> Optional[NailService]:
+        self, user_id: int, nail_service_id: int
+    ) -> Optional[NailServiceResponse]:
         pass
 
     @abstractmethod
     async def update_nail_service(
         self, nail_service_id: int, nail_service_in: NailServiceUpdate
-    ) -> NailService:
+    ) -> NailServiceResponse:
         pass
 
     @abstractmethod
@@ -206,20 +230,26 @@ class INailServiceRepository(ABC):
 class ISculpingNailSizeRepository(ABC):
     @abstractmethod
     async def create_sculping_nail_size(
-        self, sculping_nail_size_in: SculpingNailSizeCreate
-    ) -> SculpingNailSize:
+        self, user_id: int, sculping_nail_size_in: SculpingNailSizeCreate
+    ) -> SculpingNailSizeResponse:
+        pass
+
+    @abstractmethod
+    async def get_all_sculping_nail_size(
+        self, user_id: int, skip: int, limit: int
+    ) -> List[SculpingNailSizeResponse]:
         pass
 
     @abstractmethod
     async def get_all_sculping_nail_size_by_id(
-        self, size_id: int
-    ) -> List[SculpingNailSize]:
+        self, user_id: int, sculping_nail_size_id: int
+    ) -> List[SculpingNailSizeResponse]:
         pass
 
     @abstractmethod
     async def update_sculping_nail_size(
         self, sculping_nail_size_id: int, sculping_nail_size_in: SculpingNailSizeUpdate
-    ) -> SculpingNailSize:
+    ) -> SculpingNailSizeResponse:
         pass
 
     @abstractmethod

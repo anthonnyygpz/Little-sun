@@ -9,6 +9,7 @@ class NailDesign(Base):
     design_id = Column(Integer, primary_key=True, autoincrement=True)
     design_name = Column(String, nullable=False)
     base_price = Column(Integer, nullable=False)
+    user_id = Column(Integer, nullable=False)
 
     appointment = relationship(
         "Appointment", secondary="appointment_designs", back_populates="nail_design"

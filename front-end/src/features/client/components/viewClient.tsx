@@ -5,8 +5,14 @@ import TableClientsInfo from "../../shared/components/tableClientInfo/tableClien
 
 const ViewClient = () => {
   return (
-    <DefaultLayout>
-      <ButtonLink icon={<ChevronLeft size={30} />} text="Regresar" route="/" />
+    <DefaultLayout site="Clientes">
+      <div className="px-2 sm:px-6 lg:px-4">
+        <ButtonLink
+          icon={<ChevronLeft size={28} />}
+          text="Regresar"
+          route="/"
+        />
+      </div>
       <TableClientsInfo />
     </DefaultLayout>
   );

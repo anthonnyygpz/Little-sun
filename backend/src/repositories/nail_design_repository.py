@@ -5,7 +5,11 @@ from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from src.models.nail_design import NailDesign
-from src.schemas.nail_design import NailDesignCreate, NailDesignUpdate
+from src.schemas.nail_design import (
+    NailDesignCreate,
+    NailDesignResponse,
+    NailDesignUpdate,
+)
 
 from .interfaces import INailDesignRepository
 
@@ -14,11 +18,14 @@ from .interfaces import INailDesignRepository
 class NailDesignRepository(INailDesignRepository):
     db: Session
 
-    async def create_nail_design(self, nail_design_in: NailDesignCreate) -> NailDesign:
+    async def create_nail_design(
+        self, nail_design_in: NailDesignCreate
+    ) -> NailDesignResponse:
         try:
             db_nail_design = NailDesign(
                 design_name=nail_design_in.design_name,
                 base_price=nail_design_in.base_price,
+                user_id=nail_design_in.user_id,
             )
             self.db.add(db_nail_design)
             self.db.commit()
@@ -31,14 +38,34 @@ class NailDesignRepository(INailDesignRepository):
             self.db.rollback()
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
-    async def get_all_nail_design(self) -> Optional[List[NailDesign]]:
-        return self.db.query(NailDesign).all()
+    async def get_all_nail_design(
+        self, user_id: int, skip: int, limit: int
+    ) -> List[NailDesignResponse]:
+        return (
+            self.db.query(NailDesign)
+            .filter_by(user_id=user_id)
+            .offset(skip)
+            .limit(limit)
+            .all()  # type: ignore
+        )
 
-    async def get_nail_design_by_name(self, name_in: str) -> Optional[NailDesign]:
-        return self.db.query(NailDesign).filter_by(design_name=name_in).first()
+    async def get_nail_design_by_name(
+        self, user_id: int, name_in: str
+    ) -> Optional[NailDesignResponse]:
+        return (
+            self.db.query(NailDesign)
+            .filter_by(user_id=user_id, design_name=name_in)
+            .first()
+        )
 
-    async def get_nail_design_by_id(self, nail_design_id: int) -> Optional[NailDesign]:
-        return self.db.query(NailDesign).filter_by(design_id=nail_design_id).first()
+    async def get_nail_design_by_id(
+        self, user_id: int, nail_design_id: int
+    ) -> Optional[NailDesignResponse]:
+        return (
+            self.db.query(NailDesign)
+            .filter_by(user_id=user_id, design_id=nail_design_id)
+            .first()
+        )
 
     async def update_nail_design(
         self, nail_design_in: NailDesignUpdate, nail_design_id: int

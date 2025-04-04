@@ -11,5 +11,8 @@ class Client(Base):
     name = Column(String, nullable=False)
     phone_number = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), nullable=False, default=func.now())
+    user_id = Column(Integer, nullable=False)
 
-    appointment = relationship("Appointment", back_populates="client")
+    appointment = relationship(
+        "Appointment", back_populates="client", cascade="all,delete"
+    )

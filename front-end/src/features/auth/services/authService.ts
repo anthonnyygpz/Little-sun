@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loginApi } from "../../../libs/enpoints/authApi";
+import { loginApi } from "../../../lib/enpoints/authApi";
 
 const AuthService = () => {
   const [loadingToken, setLoadingToken] = useState<boolean>(true);

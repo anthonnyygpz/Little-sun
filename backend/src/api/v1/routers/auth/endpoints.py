@@ -17,3 +17,11 @@ async def login(
 ):
     user = await user_service.get_user_by_email(email=form_data.username)
     return await auth_service.login(form_data=form_data, user_in=user)
+
+
+@router.post("/verify-token")
+async def veryfy_token(
+    token: str,
+    auth_service: AuthService = Depends(get_auth_service),
+):
+    return await auth_service.validate_token(token)

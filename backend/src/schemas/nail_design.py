@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class NailDesignBase(BaseModel):
     design_name: str
     base_price: int
+    user_id: int
 
 
 class NailDesignCreate(NailDesignBase):
@@ -13,6 +14,7 @@ class NailDesignCreate(NailDesignBase):
 class NailDesignUpdate(BaseModel):
     design_name: str | None = None
     base_price: int | None = None
+    user_id: int
 
 
 class NailDesignResponse(NailDesignBase):

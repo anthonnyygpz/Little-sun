@@ -1,11 +1,11 @@
-import Card from "../card.tsx";
+import { SculpingNailSizeResponse } from "../../types/sculpingNailSizeTypes.ts";
+import AlertDialog from "../AlertDialog.tsx";
+import Button from "../button.tsx";
+import { Card, LoadingCard, ErrorCard } from "../card.tsx";
+import Label from "../label.tsx";
 import RadioButtonGroup from "../radioButton.tsx";
 import SubTitle from "../subTitle.tsx";
-import Button from "../button.tsx";
-import Label from "../label.tsx";
-import AlertDialog from "../AlertDialog.tsx";
 import { useSculpingSize } from "./hooks/useSculpingSize.ts";
-import { SculpingNailSizeResponse } from "../../types/sculpingNailSizeTypes.ts";
 
 interface SculpingNailSizeProps {
   onChange: (data: {
@@ -30,16 +30,18 @@ const CardSculpingNailSize: React.FC<SculpingNailSizeProps> = ({
     handleUncheckAll,
     handleIsDelete,
     selectedOption,
+    getAllSculpingSize,
   } = useSculpingSize({ onChange, handleDelete });
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <LoadingCard />;
+  if (error)
+    return <ErrorCard onRetry={getAllSculpingSize} technicalDetails={error} />;
 
   return (
     <Card>
       <SubTitle title={"Tamaño de esculpido"} />
       {sculpingSizes.map((sculpingSize: SculpingNailSizeResponse) => (
-        <div key={sculpingSize.size_id}>
+        <div key={sculpingSize.size_id} className="flex space-x-1 space-y-1">
           <RadioButtonGroup
             idKey={sculpingSize.size_id}
             name={sculpingSize.size_name}
@@ -48,16 +50,20 @@ const CardSculpingNailSize: React.FC<SculpingNailSizeProps> = ({
             selectedValue={selectedOption}
             onChange={(data) => handleOptionChange(data)}
           />
-          <Label className="label" text={` - $${sculpingSize.base_price}`} />
+          <Label
+            className="text-green-700 items-center justify-center flex "
+            text={` - $${sculpingSize.base_price}`}
+            id={`radio-${sculpingSize.size_id}-${sculpingSize.size_name}`}
+          />
         </div>
       ))}
       {defaultSculpingSize !== "" ? (
-        <Label className="label" text={"Datos: " + defaultSculpingSize} />
+        <Label className="" text={"Datos: " + defaultSculpingSize} />
       ) : (
         ""
       )}
-      <div className="wrapper between">
-        <Button text={"Desmarcar"} onClick={handleUncheckAll} />
+      <div className="flex justify-center">
+        <Button onClick={handleUncheckAll}>Desmarcar</Button>
         {defaultSculpingSize !== "" ? (
           <AlertDialog
             nameText={defaultSculpingSize}

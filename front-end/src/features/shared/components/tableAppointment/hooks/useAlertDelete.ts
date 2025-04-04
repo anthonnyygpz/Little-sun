@@ -4,7 +4,10 @@ import { AppointmentService } from "../../../../appointment";
 export const useAlert = () => {
   const { deleteAppointment, getAllAppointments } = AppointmentService();
 
-  const handleAlertDelete = async (quote_id: number, nameText: string) => {
+  const handleAlertDelete = async (
+    appointment_id: number,
+    nameText: string,
+  ) => {
     Swal.fire({
       icon: "warning",
       title: `Desea eliminar los siguientes datos de la tabla?`,
@@ -13,8 +16,8 @@ export const useAlert = () => {
     }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          await deleteAppointment(quote_id);
-          getAllAppointments();
+          await deleteAppointment(appointment_id);
+          await getAllAppointments();
           Swal.fire(
             "¡Exito!",
             "Los datos fueron borrados con exito",

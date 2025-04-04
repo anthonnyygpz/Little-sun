@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import Card from "../card";
+import { Card } from "../card";
 import Subtitle from "../subTitle";
 import Input from "../input";
 

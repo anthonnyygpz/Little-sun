@@ -2,11 +2,11 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { encode } from "js-base64";
 import Swal from "sweetalert2";
-import { DesignService } from "../../../design";
-import { DesignResponse } from "../../types/designTypes.ts";
+import { NailDesignService } from "../../../design";
+import { NailDesignResponse } from "../../types/designTypes.ts";
 
 const TableDesign: React.FC = () => {
-  const { designs, deleteDesigns } = DesignService();
+  const { designs, deleteDesigns } = NailDesignService();
   const handleAlertDelete = async (design_id: number, nameText: string) => {
     Swal.fire({
       icon: "warning",
@@ -44,7 +44,7 @@ const TableDesign: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {designs.map((design: DesignResponse) => (
+          {designs.map((design: NailDesignResponse) => (
             <tr>
               <td>{design.design_name}</td>
               <td>{design.price}</td>

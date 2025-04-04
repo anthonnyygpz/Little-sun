@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getAllSculpingApi,
   deleteSculpingApi,
-} from "../../../libs/enpoints/sculpinNailSizeApi.ts";
+} from "../../../lib/enpoints/sculpinNailSizeApi.ts";
 import { SculpingNailSizeResponse } from "../../shared/types/sculpingNailSizeTypes.ts";
 
 const SculpingNailSizeService = () => {
@@ -47,7 +47,13 @@ const SculpingNailSizeService = () => {
     getAllSculpingSize();
   }, []);
 
-  return { sculpingSizes, loading, error, deleteSculpingSize };
+  return {
+    getAllSculpingSize,
+    sculpingSizes,
+    loading,
+    error,
+    deleteSculpingSize,
+  };
 };
 
 export default SculpingNailSizeService;

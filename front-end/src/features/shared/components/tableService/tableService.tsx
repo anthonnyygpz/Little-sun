@@ -1,12 +1,12 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ServiceService } from "../../../service";
+import { NailServiceService } from "../../../service";
 import { encode } from "js-base64";
 import Swal from "sweetalert2";
-import { ServiceResponse } from "../../types/serviceTypes.ts";
+import { NailServiceResponse } from "../../types/nailServiceTypes.ts";
 
 const TableService: React.FC = () => {
-  const { services, getAllServices, deleteServices } = ServiceService();
+  const { services, getAllServices, deleteServices } = NailServiceService();
 
   const handleAlertDelete = async (client_id: number, nameText: string) => {
     Swal.fire({
@@ -46,10 +46,10 @@ const TableService: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {services.map((service: ServiceResponse) => (
+          {services.map((service: NailServiceResponse) => (
             <tr>
               <td>{service.service_name}</td>
-              <td>{service.price}</td>
+              <td>{service.base_price}</td>
               <td>
                 <div className="container-buttons">
                   <Link
@@ -65,7 +65,7 @@ const TableService: React.FC = () => {
                     onClick={() =>
                       handleAlertDelete(
                         service.service_id,
-                        `${service.service_name} / ${service.price}`,
+                        `${service.service_name} / ${service.base_price}`,
                       )
                     }
                   >

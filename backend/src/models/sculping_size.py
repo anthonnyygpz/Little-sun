@@ -9,5 +9,6 @@ class SculpingNailSize(Base):
     size_id = Column(Integer, primary_key=True, autoincrement=True)
     size_name = Column(String, nullable=False)
     base_price = Column(Integer, nullable=False)
+    user_id = Column(Integer, nullable=False)
 
     appointment = relationship("Appointment", back_populates="sculping_size")

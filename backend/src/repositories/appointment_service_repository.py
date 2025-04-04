@@ -3,7 +3,7 @@ from typing import List
 
 from sqlalchemy.orm import Session
 from src.models.appointment_service import AppointmentService
-from src.schemas.appointment import AppointmentServiceCreate
+from src.schemas.appointment_service import AppointmentServiceCreate
 
 from .interfaces import IAppointmentServiceRepository
 
@@ -16,8 +16,13 @@ class AppointmentServiceRepository(IAppointmentServiceRepository):
         self, appointment_in: AppointmentServiceCreate
     ) -> AppointmentService:
         db_appointment_service = AppointmentService(
-            quote_id=appointment_in.appointment_id, service_id=appointment_in.service_id
+            appointment_id=appointment_in.appointment_id,
+            service_id=appointment_in.service_id,
         )
+
+        self.db.add(db_appointment_service)
+        self.db.commit()
+        self.db.refresh(db_appointment_service)
         return db_appointment_service
 
     async def get_all_appointment_by_id(

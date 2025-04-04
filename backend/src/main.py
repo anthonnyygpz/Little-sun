@@ -13,11 +13,16 @@ from .core.config import settings
 app = FastAPI(title="Little Sun")
 api_version = settings.API_VERSION_STR
 
+origins = [
+    "*",
+    "http://localhost:5173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
@@ -25,7 +30,7 @@ app.include_router(auth_router, prefix=f"{api_version}/auth", tags=["Auth"])
 app.include_router(user_router, prefix=f"{api_version}/users", tags=["Users"])
 app.include_router(client_router, prefix=f"{api_version}/clients", tags=["Clients"])
 app.include_router(
-    nail_design_router, prefix=f"{api_version}/nail_designs", tags=["Nail Designs"]
+    nail_design_router, prefix=f"{api_version}/nail_desings", tags=["Nail Designs"]
 )
 app.include_router(
     nail_service_router, prefix=f"{api_version}/nail_services", tags=["Nail Services"]

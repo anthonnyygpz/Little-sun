@@ -1,6 +1,12 @@
 from dataclasses import dataclass
 from typing import List
 
+from fastapi import HTTPException, status
+
+from src.models.appointment_service import AppointmentService as AppointmentNailService
+from src.models.appointment_design import AppointmentDesign
+from src.models.appointment import Appointment
+from src.models.client import Client
 from src.repositories.interfaces import (
     IAppointmentDeisngRepository,
     IAppointmentRepository,
@@ -11,14 +17,12 @@ from src.repositories.interfaces import (
     ISculpingNailSizeRepository,
 )
 from src.schemas.appointment import (
-    AppointmenDesigntCreate,
-    Appointment,
-    AppointmentCreate,
+    AppointmentFullCreate,
     AppointmentFullUpdate,
     AppointmentResponse,
-    AppointmentServiceCreate,
 )
-from src.schemas.client import ClientCreate
+from src.schemas.appointment_design import AppointmenDesigntCreate
+from src.schemas.appointment_service import AppointmentServiceCreate
 
 
 @dataclass()
@@ -35,6 +39,7 @@ class AppointmentService:
         """Formatea los resultados de la base de datos"""
         return AppointmentResponse(
             appointment_id=row.appointment_id,
+            user_id=row.user_id,
             client_id=row.client_id,
             client_name=row.client_name.title() if row.client_name else "",
             phone_number=row.phone_number or "",
@@ -47,54 +52,80 @@ class AppointmentService:
             total_amount=round(float(row.total_amount), 2),
         )
 
-    async def create_full_appointment(self, appointment_in: Appointment):
+    async def create_full_appointment(
+        self, user_id: int, appointment_in: AppointmentFullCreate
+    ):
         client_id: int = 0
         appointment_id: int = 0
 
-        get_client_if_exists = await self.client_repo.get_client_by_name(
-            name=appointment_in.client_name
-        )
-        if get_client_if_exists:
-            client_id = get_client_if_exists.client_id  # type: ignore
-        else:
-            new_client = await self.client_repo.create_client(
-                client_in=ClientCreate(
-                    name=appointment_in.client_name,
-                    phone_number=appointment_in.phone_number,
-                )
+        try:
+            get_client_if_exists = await self.client_repo.get_client_by_name(
+                name=appointment_in.client_name, user_id=user_id
             )
-            client_id = new_client.client_id  # type:ignore
+            if get_client_if_exists:
+                client_id = get_client_if_exists.client_id  # type: ignore
+            else:
+                try:
+                    new_client = await self.client_repo.create_client(
+                        user_id=user_id,
+                        client_in=Client(
+                            name=appointment_in.client_name,
+                            phone_number=appointment_in.phone_number,
+                            user_id=user_id,
+                        ),
+                    )
+                    client_id = new_client.client_id
+                except Exception as e:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
+                    )
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-        create_appointment = await self.appointment_repo.create_appointment(
-            appointment_in=AppointmentCreate(
-                client_id=client_id,
-                nail_size_id=appointment_in.nail_size_id,
+        try:
+            create_appointment = await self.appointment_repo.create_appointment(
+                user_id=user_id,
+                appointment_in=Appointment(
+                    client_id=client_id,
+                    user_id=user_id,
+                    nail_size_id=appointment_in.nail_size_id,
+                    date_appointment=appointment_in.date_appointment,
+                    appointment_time=appointment_in.appointment_time,
+                ),
             )
-        )
-        appointment_id = create_appointment.appointment_id  # type: ignore
-        if appointment_in.designs:
-            for id in appointment_in.designs:
-                if id != 0:
-                    await self.appointment_design_repo.create_appointment_design(
-                        appointment_in=AppointmenDesigntCreate(
-                            appointment_id=appointment_id, design_id=id
-                        )
-                    )
 
-        if appointment_in.services:
-            for id in appointment_in.services:
-                if id != 0:
-                    await self.appointment_service_repo.create_appointment_service(
-                        appointment_in=AppointmentServiceCreate(
-                            appointment_id=appointment_id, service_id=id
+            appointment_id = create_appointment.appointment_id
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        try:
+            if appointment_in.nail_designs:
+                for id in appointment_in.nail_designs:
+                    if id != 0:
+                        await self.appointment_design_repo.create_appointment_design(
+                            appointment_in=AppointmentDesign(
+                                appointment_id=appointment_id, design_id=id
+                            )
                         )
-                    )
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
+        try:
+            if appointment_in.nail_services:
+                for id in appointment_in.nail_services:
+                    if id != 0:
+                        await self.appointment_service_repo.create_appointment_service(
+                            appointment_in=AppointmentNailService(
+                                appointment_id=appointment_id, service_id=id
+                            )
+                        )
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
         return {"detail": "Appointment create successfully"}
 
-    async def get_all_appointments(self) -> List[AppointmentResponse]:
+    async def get_all_appointments(self, user_id: int) -> List[AppointmentResponse]:
         """Obtiene y formatea las citas con el total consolidado"""
         try:
-            appointments = await self.appointment_repo.get_all_appointments()
+            appointments = await self.appointment_repo.get_all_appointments(user_id)
             return [self._format_appointment(row) for row in appointments]  # type: ignore
         except Exception as e:
             raise RuntimeError(f"Error de servicio: {str(e)}")

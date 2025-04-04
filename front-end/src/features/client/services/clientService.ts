@@ -9,8 +9,9 @@ import {
   fetchClient,
   deleteClient,
   updateClient,
-} from "../../../libs/enpoints/clientApi.ts";
+} from "../../../lib/enpoints/clientApi.ts";
 import { useEffect, useState } from "react";
+import LocalStorageItem from "../../shared/constants/localStorage.ts";
 
 const ClientService = () => {
   const [clients, setClients] = useState<ClientResponse>();
@@ -21,10 +22,13 @@ const ClientService = () => {
   const [loadingClientAll, setLoadingClientAll] = useState<boolean>(true);
   const [errorClientAll, setErrorClientAll] = useState<string | null>(null);
 
+  const { CLIENT_CACHE, APPOINTMENT_CACHE } = LocalStorageItem();
+
   const addClient = async (newClient: ClientCreate) => {
     try {
       setLoading(true);
       const createdClient = await createClient(newClient);
+      localStorage.removeItem(CLIENT_CACHE);
       return createdClient;
     } catch (error) {
       setError("Failed to create client");
@@ -34,13 +38,51 @@ const ClientService = () => {
     }
   };
 
-  const getAll = async () => {
+  const getAllClients = async () => {
     try {
-      setLoadingClientAll(true);
-      const response = await fetchClient();
-      setClientAll(response);
-    } catch {
+      // Intentar obtener datos del caché primero
+      const cachedData = localStorage.getItem(CLIENT_CACHE);
+      const now = Date.now();
+
+      if (cachedData) {
+        const { data, timestamp } = JSON.parse(cachedData);
+
+        // Verificar si el caché está fresco
+        if (now - timestamp < 5 * 60 * 1000) {
+          setClientAll(data);
+          return; // Salir temprano si usamos caché válido
+        }
+      }
+
+      // Si no hay caché válido, hacer la solicitud
+      const freshData = await fetchClient();
+      setClientAll(freshData);
+
+      // Actualizar el caché con marca de tiempo
+      try {
+        const cacheEntry = JSON.stringify({
+          data: freshData,
+          timestamp: now,
+        });
+        localStorage.setItem(CLIENT_CACHE, cacheEntry);
+      } catch (cacheError) {
+        console.error("Error al guardar en caché:", cacheError);
+        // No romper el flujo por errores de caché
+      }
+    } catch (error) {
       setErrorClientAll("Failed to fetch clients");
+      console.error(error);
+
+      try {
+        const cachedData = localStorage.getItem("client_cache");
+        if (cachedData) {
+          const { data } = JSON.parse(cachedData);
+          setClientAll(data);
+          setErrorClientAll("Using cached data (connection issue)");
+        }
+      } catch (fallbackError) {
+        console.error("Fallback cache failed:", fallbackError);
+      }
     } finally {
       setLoadingClientAll(false);
     }
@@ -60,9 +102,10 @@ const ClientService = () => {
     }
   };
 
-  const updateClients = async (editClient: ClientUpdate) => {
+  const updateClients = async (client_id: number, editClient: ClientUpdate) => {
     try {
-      return await updateClient(editClient);
+      localStorage.removeItem(CLIENT_CACHE);
+      return await updateClient(client_id, editClient);
     } catch (error) {
       console.error(error);
     }
@@ -71,8 +114,11 @@ const ClientService = () => {
   const deleteClients = async (id: number) => {
     try {
       setLoading(true);
-      const deletedClients = await deleteClient(id);
-      return deletedClients;
+      const data = await deleteClient(id);
+      localStorage.removeItem(CLIENT_CACHE);
+      localStorage.removeItem(APPOINTMENT_CACHE);
+      getAllClients();
+      return data;
     } catch (error) {
       setError("Failed to create client");
       console.error(error);
@@ -82,8 +128,8 @@ const ClientService = () => {
   };
 
   useEffect(() => {
-    getAll();
-  }, []);
+    getAllClients();
+  }, [getAllClients]);
 
   return {
     clients,
@@ -94,7 +140,7 @@ const ClientService = () => {
     errorClientAll,
     getByNameClient,
     addClient,
-    getAll,
+    getAllClients,
     deleteClients,
     updateClients,
   };

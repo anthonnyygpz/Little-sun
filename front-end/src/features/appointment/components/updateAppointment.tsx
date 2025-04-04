@@ -2,15 +2,15 @@ import { decode } from "js-base64";
 import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteAppointmentDesign } from "../../../libs/enpoints/appointmentDesignApi.ts";
-import { deleteAppointmentService } from "../../../libs/enpoints/appointmentServiceApi.ts";
+import { deleteAppointmentDesign } from "../../../lib/enpoints/appointmentDesignApi.ts";
+import { deleteAppointmentService } from "../../../lib/enpoints/appointmentServiceApi.ts";
 import { AppointmentService } from "../../appointment";
 import { ButtonLink } from "../../shared/components/buttonLink.tsx";
 import ClientInfo from "../../shared/components/cardClientInfo/cardClientInfo.tsx";
-import Design from "../../shared/components/cardDesign/cardDesign.tsx";
+import Design from "../../shared/components/cardNailDesign/cardNailDesign.tsx";
 import Resume from "../../shared/components/cardResume/cardResume.tsx";
 import SculpingNailSize from "../../shared/components/cardSculpingNailSize/cardSculpingNailSize.tsx";
-import ServicesSection from "../../shared/components/cardService/cardService.tsx";
+import ServicesSection from "../../shared/components/cardNailService/cardNailService.tsx";
 import DefaultLayout from "../../shared/components/defaultLayout.tsx";
 import Statu from "../../shared/components/statu/statu.tsx";
 import { Title } from "../../shared/components/title.tsx";
@@ -139,14 +139,14 @@ const UpdateQuote: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await editAppointment({
-      quote_id: dataDecode.quote_id,
+      appointment_id: dataDecode.appointment_id,
       client_id: dataDecode.client_id,
       nail_size_id: formData.nailSize.id,
-      name: formData.clientInfo.name,
+      client_name: formData.clientInfo.name,
       phone_number: formData.clientInfo.phone,
       total_amount: formData.totalPrice,
-      designs: formData.designs.options,
-      services: formData.services.options,
+      nail_designs: formData.designs.options,
+      nail_services: formData.services.options,
       status: formData.status.selectedValue,
     });
 

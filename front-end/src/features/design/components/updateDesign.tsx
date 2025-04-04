@@ -2,7 +2,7 @@ import { decode } from "js-base64";
 import { ChevronLeft } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { DesignService } from "../../design";
+import { NailDesignService } from "../../design";
 import { ButtonLink } from "../../shared/components/buttonLink";
 import DefaultLayout from "../../shared/components/defaultLayout";
 import EditDesignCard from "../../shared/components/cardUpdateDesign/cardUpdateDesign.tsx";
@@ -12,7 +12,7 @@ const UpdateDesign: React.FC = () => {
   const [formData, setFormData] = useState({
     design: { design_name: "", price: 0 },
   });
-  const { updateDesigns } = DesignService();
+  const { updateDesigns } = NailDesignService();
   const navigate = useNavigate();
   const { data } = useParams();
   const dataDecode = data ? JSON.parse(decode(data)) : null;
@@ -36,14 +36,14 @@ const UpdateDesign: React.FC = () => {
       await updateDesigns({
         design_id: dataDecode.design_id,
         design_name: formData.design.design_name,
-        price: formData.design.price,
+        base_price: formData.design.price,
       });
       navigate("/Designs");
     }
   };
   return (
     <DefaultLayout site="Actulizar Diseño">
-      <Title title="Actulizar Diseño" className="title-purple" />
+      <Title title="Actulizar Diseño" />
       <ButtonLink
         icon={<ChevronLeft size={30} />}
         text="Regresar"

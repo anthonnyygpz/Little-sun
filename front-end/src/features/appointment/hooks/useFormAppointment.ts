@@ -15,6 +15,7 @@ const useFormState = () => {
     },
     totalPrice: 0 as number, // Especifica que totalPrice es de tipo number
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const calculateTotalPrice = (
     services: { price: number }[],
@@ -107,6 +108,14 @@ const useFormState = () => {
     });
   };
 
+  const totalServices = formData.services.services.reduce(
+    (sum, service) => sum + service.price,
+    0,
+  );
+  const totalDesigns = formData.designs.designs.reduce(
+    (sum, design) => sum + design.price,
+    0,
+  );
   return {
     formData,
     resetAll,
@@ -114,6 +123,10 @@ const useFormState = () => {
     handleNailSizeChange,
     handleServicesChange,
     handleDesignChange,
+    totalServices,
+    totalDesigns,
+    isModalOpen,
+    setIsModalOpen,
   };
 };
 

@@ -5,7 +5,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from src.models.client import Client
-from src.schemas.client import ClientCreate, ClientUpdate
+from src.schemas.client import ClientCreate, ClientResponse, ClientUpdate
 
 from .interfaces import IClientRepository
 
@@ -14,11 +14,14 @@ from .interfaces import IClientRepository
 class ClientRepository(IClientRepository):
     db: Session
 
-    async def create_client(self, client_in: ClientCreate) -> Client:
+    async def create_client(
+        self, user_id: int, client_in: ClientCreate
+    ) -> ClientResponse:
         try:
             db_client = Client(
                 name=client_in.name.lower(),
                 phone_number=client_in.phone_number,
+                user_id=user_id,
             )
             self.db.add(db_client)
             self.db.commit()
@@ -31,15 +34,27 @@ class ClientRepository(IClientRepository):
             self.db.rollback()
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
-    async def get_client_all(self, skip: int = 0, limit: int = 100) -> List[Client]:
-        return self.db.query(Client).offset(skip).limit(limit).all()
+    async def get_client_all(
+        self, user_id: int, skip: int = 0, limit: int = 100
+    ) -> List[ClientResponse]:
+        return (
+            self.db.query(Client)
+            .filter_by(user_id=user_id)
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
 
-    async def get_client_by_name(self, name: str) -> Optional[Client]:
-        return self.db.query(Client).filter_by(name=name.lower()).first()
+    async def get_client_by_name(
+        self, user_id: int, name: str
+    ) -> Optional[ClientResponse]:
+        return (
+            self.db.query(Client).filter_by(name=name.lower(), user_id=user_id).first()
+        )
 
     async def update_client(
         self, client_id: int, client_in: ClientUpdate
-    ) -> Optional[Client]:
+    ) -> Optional[ClientResponse]:
         db_client = self.db.query(Client).filter_by(client_id=client_id).first()
         if db_client:
             update_data = client_in.model_dump(exclude_unset=True)

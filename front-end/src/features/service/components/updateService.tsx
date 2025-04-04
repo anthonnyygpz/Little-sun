@@ -2,7 +2,7 @@ import { decode } from "js-base64";
 import { FormEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Title } from "../../shared/components/title.tsx";
-import { ServiceService } from "../";
+import { NailServiceService } from "../";
 import DefaultLayout from "../../shared/components/defaultLayout.tsx";
 import CardEditService from "../../shared/components/cardEditService/cardEditService.tsx";
 import { ButtonLink } from "../../shared/components/buttonLink.tsx";
@@ -12,7 +12,7 @@ const UpdateService: React.FC = () => {
   const [formData, setFormData] = useState({
     service: { service_name: "", price: 0 },
   });
-  const { updateServices } = ServiceService();
+  const { updateServices } = NailServiceService();
   const navigate = useNavigate();
   const { data } = useParams();
   const dataDecode = data ? JSON.parse(decode(data)) : null;
@@ -36,7 +36,7 @@ const UpdateService: React.FC = () => {
       await updateServices({
         service_id: dataDecode.service_id,
         service_name: formData.service.service_name,
-        price: formData.service.price,
+        base_price: formData.service.price,
       });
       navigate("/Services");
     }
@@ -45,7 +45,7 @@ const UpdateService: React.FC = () => {
   return (
     <DefaultLayout site="Aculizar Servicio">
       <form onSubmit={handleSubmit}>
-        <Title title="Actulizar Servicio" className="title-purple" />
+        <Title title="Actulizar Servicio" />
         <ButtonLink
           icon={<ChevronLeft size={30} />}
           text="Regresar"

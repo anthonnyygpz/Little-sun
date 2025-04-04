@@ -22,7 +22,7 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   const inputId = `radio-${idKey}-${value}`;
 
   return (
-    <label htmlFor={inputId}>
+    <label htmlFor={inputId} className="">
       <input
         id={inputId}
         type="radio"
@@ -32,6 +32,7 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
         onChange={(e) =>
           onChange({ selectedValue: e.target.value, id: idKey, price: price })
         }
+        className=""
       />
       {name}
     </label>

@@ -33,15 +33,22 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <h1>Iniciar sesión</h1>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-white rounded-lg shadow-xl p-6 max-w-md">
+        <div className="flex justify-center pb-6">
+          <h1 className="text-2xl">Iniciar sesión</h1>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Correo electrónico</label>
+
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="email"
+            >
+              Correo electrónico
+            </label>
             <input
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
               type="email"
               id="email"
               placeholder="ejemplo@correo.com"
@@ -51,9 +58,15 @@ const Login = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="password"
+            >
+              Contraseña
+            </label>
             <input
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
               type="password"
               id="password"
               placeholder="Tu contraseña"
@@ -63,29 +76,40 @@ const Login = () => {
             />
           </div>
 
-          <div className="remember-forgot">
-            <div className="remember-me">
+          <div>
+            <div>
               <input
                 type="checkbox"
                 id="remember"
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <label htmlFor="remember">Recordarme</label>
+              <label htmlFor="remember" className="pl-2">
+                Recordarme
+              </label>
             </div>
-            <a href="#" className="forgot-password">
+            <Link to="#" className="text-purple-500 hover:text-purple-700">
               ¿Olvidaste tu contraseña?
-            </a>
+            </Link>
           </div>
-          <div className="error-container">
-            <span>{error}</span>
-          </div>
-          <button type="submit" className="login-button">
+
+          <span className="text-red-700 flex justify-center">{error}</span>
+
+          <button
+            type="submit"
+            className="bg-purple-500 hover:bg-purple-700 active:bg-white text-white active:text-purple-500 font-bold py-2 px-4 rounded"
+          >
             {loading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
-        <div className="login-footer">
-          ¿No tienes una cuenta? <Link to="/Register">Regístrate</Link>
+        <div className="">
+          ¿No tienes una cuenta?{" "}
+          <Link
+            to="/Register"
+            className="text-purple-500 hover:text-purple-700"
+          >
+            Regístrate
+          </Link>
         </div>
       </div>
     </div>

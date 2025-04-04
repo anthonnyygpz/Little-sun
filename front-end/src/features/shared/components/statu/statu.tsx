@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ContainerSection from "../card.tsx";
+import { Card } from "../card.tsx";
 import RadioButtonGroup from "../radioButton.tsx";
 import SubTittle from "../subTitle.tsx";
 import Button from "../button.tsx";
@@ -23,7 +23,7 @@ const Statu: React.FC<StatuProps> = ({ onChange }) => {
   };
 
   return (
-    <ContainerSection>
+    <Card>
       <SubTittle title="Esatus" />
       {status.map((statu, index) => (
         <div key={index}>
@@ -51,7 +51,7 @@ const Statu: React.FC<StatuProps> = ({ onChange }) => {
       ))}
 
       <Button text={"Eliminar"} onClick={handleUncheckAll} />
-    </ContainerSection>
+    </Card>
   );
 };
 

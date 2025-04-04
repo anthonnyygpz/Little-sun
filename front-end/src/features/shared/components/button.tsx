@@ -1,15 +1,24 @@
 interface ButtonProps {
-  text: string;
+  children: string;
+  type?: string;
   onClick?: () => void;
+  className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  type = "button",
+  onClick,
+  className,
+}) => {
   return (
-    <div className="button-wrapper">
-      <button type="button" onClick={onClick}>
-        {text}
-      </button>
-    </div>
+    <button
+      type={type}
+      onClick={onClick}
+      className={`bg-purple-500 hover:bg-purple-700 active:bg-purple-100 active:text-purple-700 text-white rounded-md py-2 px-4 ${className}`}
+    >
+      {children}
+    </button>
   );
 };
 
