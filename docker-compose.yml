@@ -1,8 +1,8 @@
 services:
   frontend:
-    container_name: front-end
+    container_name: frontend
     build:
-      context: ./front-end
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -13,9 +13,9 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./front-end
-          target: ./front-end/src/
-        - path: ./front-end/package.json
+          path: ./frontend
+          target: ./frontend/src/
+        - path: ./frontend/package.json
           action: rebuild
 
   backend:

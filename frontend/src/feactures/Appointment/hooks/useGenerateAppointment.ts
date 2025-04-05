@@ -8,7 +8,13 @@ import { ROUTE_PATHS } from "../../../constants/routes.ts";
 import toast from "react-hot-toast";
 
 export const useGenerateAppointment = () => {
-  const [formData, setFormData] = useState<Form>({});
+  const [formData, setFormData] = useState<Form>({
+    client: { name: "", phone: "" },
+    sculpingNailSize: { size_id: 0, nailLength: "", price: 0 },
+    nailService: { ids: [], nailServiceData: [] },
+    nailDesign: { ids: [], nailDesignData: [] },
+    dateAndTime: { date: "", time: "" },
+  });
   const navigate = useNavigate();
   const { isAuthenticated, token } = useAuth();
 
@@ -16,9 +22,9 @@ export const useGenerateAppointment = () => {
     async (e: FormEvent) => {
       e.preventDefault();
       if (
-        !formData.client?.name ||
-        !formData.dateAndTime?.time ||
-        !formData.dateAndTime?.date
+        !formData.client.name ||
+        !formData.dateAndTime.time ||
+        !formData.dateAndTime.date
       ) {
         toast.error("Se requiere rellenar algunos datos.");
         return;
@@ -31,11 +37,11 @@ export const useGenerateAppointment = () => {
             {
               client_name: formData.client.name,
               phone_number: formData.client.phone,
-              nail_size_id: formData.sculpingNailSize?.size_id || 0,
-              nail_designs: formData.nailDesign?.ids || [],
-              nail_services: formData.nailService?.ids || [],
-              date_appointment: formData.dateAndTime?.date || "",
-              appointment_time: formData.dateAndTime?.time || "",
+              nail_size_id: formData.sculpingNailSize.size_id,
+              nail_designs: formData.nailDesign.ids,
+              nail_services: formData.nailService.ids,
+              date_appointment: formData.dateAndTime.date,
+              appointment_time: formData.dateAndTime.time,
             },
           );
           await toast.promise(appointmentPromise, {

@@ -5,9 +5,9 @@ import { SculpingNailSizeForm } from "./sculpingNailSize.types";
 import { DateAndTime } from "./dateAndTime.types";
 
 export type Form = {
-  client?: ClientInfo;
-  sculpingNailSize?: SculpingNailSizeForm;
-  nailService?: SelectedIdsService;
-  nailDesign?: SelectedIdsDesign;
-  dateAndTime?: DateAndTime;
+  client: ClientInfo;
+  sculpingNailSize: SculpingNailSizeForm;
+  nailService: SelectedIdsService;
+  nailDesign: SelectedIdsDesign;
+  dateAndTime: DateAndTime;
 };
