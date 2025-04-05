@@ -1,12 +1,4 @@
-import {
-  Ban,
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  Loader,
-  Pencil,
-  Trash,
-} from "lucide-react";
+import { Ban, Check, Loader, Pencil, Trash } from "lucide-react";
 import { Button } from "../../../components/common/Button";
 import { ModalAlert } from "../../../components/common/ModalAlert";
 import { ROUTE_PATHS } from "../../../constants/routes";

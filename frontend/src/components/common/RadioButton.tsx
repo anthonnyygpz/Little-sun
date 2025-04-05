@@ -23,7 +23,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
       <input
         onChange={(e) =>
           onChange({
-            selectedValue: e.target.value,
+            nailLength: e.target.value,
             size_id: idKey,
             price: price,
           })

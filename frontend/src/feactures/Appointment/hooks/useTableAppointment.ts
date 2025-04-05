@@ -3,6 +3,8 @@ import { appointmentService } from "../../../api/appointmentService";
 import { Appointment } from "../../../types/appointment.types";
 
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
+import { toast } from "react-hot-toast";
+import { TOAST_MESSAGE } from "../../../constants/toast";
 
 export const useTableAppointment = () => {
   const [appointments, setAppointment] = useState<Appointment[]>([]);
@@ -40,11 +42,11 @@ export const useTableAppointment = () => {
     async (id: number) => {
       try {
         if (isAuthenticated && token) {
-          // await toast.promise(appointmentService.deleteAppointment(token, id), {
-          //   success: "Se elimnio con exito.",
-          //   pending: "Cargando...",
-          //   error: "Error al borrar.",
-          // });
+          await toast.promise(appointmentService.deleteAppointment(token, id), {
+            success: TOAST_MESSAGE.SUCCESS_DELETE,
+            loading: TOAST_MESSAGE.LOADING_DELETE,
+            error: TOAST_MESSAGE.ERROR_DELETE,
+          });
           listAppointment();
         }
       } catch (error) {
