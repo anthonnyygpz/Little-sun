@@ -1,5 +1,5 @@
 export const ROUTE_PATHS = {
-  HOME: "/",
+  // HOME: "/",
   CREATE_APPOINTMENT: "/create-appointment",
   APPOINTMENTS: "/appointments",
   UPDATE_APPOINTMENT: "/update-appointment",
@@ -10,7 +10,7 @@ export const ROUTE_PATHS = {
   CREATE_NAIL_DESIGN: "/nail-nail-design",
   NAIL_DESIGN: "/nail-design",
   UDPATE_NAIL_DESIGN: "/update-nail-design",
-  LOGIN: "/login",
+  LOGIN: "/",
   REGISTER: "/register",
   FORGOT_PASSWORD: "forgot-password",
   NOT_FOUND: "*",

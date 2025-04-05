@@ -1,13 +1,28 @@
-FROM node:23-alpine
+FROM node:23-alpine AS build
 
 WORKDIR /frontend 
 
-COPY package.json pnpm-lock.yaml* ./
+COPY package*.json  ./
 
 RUN npm install --frozen-lockfile
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "run", "dev", "--host", "0.0.0.0", "--port", "3000"]
+FROM nginx:alpine
+
+COPY --from=build /frontend/dist /usr/share/nginx/html
+
+RUN echo 'server { \
+    listen 80; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html; \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
