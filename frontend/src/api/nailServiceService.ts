@@ -1,8 +1,24 @@
 import { API_CONFIG } from "../constants/api";
 import { apiService } from "./apiService";
-import { NailService } from "../types/nailService.types";
+import { NailService, CreateNailService } from "../types/nailService.types";
 
 export const nailServiceService = {
+  createNailService: async (
+    token: string,
+    newNailService: CreateNailService,
+  ) => {
+    try {
+      const response = await apiService.post(
+        API_CONFIG.ENDPOINTS.NAIL_SERVICE,
+        newNailService,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro to create nail service", error);
+      throw new Error("Error to create nail service.");
+    }
+  },
   listNailService: async (
     token: string,
     skip: number = 0,

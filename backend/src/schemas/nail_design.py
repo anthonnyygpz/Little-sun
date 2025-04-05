@@ -4,7 +4,6 @@ from pydantic import BaseModel
 class NailDesignBase(BaseModel):
     design_name: str
     base_price: int
-    user_id: int
 
 
 class NailDesignCreate(NailDesignBase):

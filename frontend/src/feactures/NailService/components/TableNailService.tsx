@@ -1,6 +1,9 @@
-import { SkeletonTheme } from "react-loading-skeleton";
+import { Pencil, Trash } from "lucide-react";
+import { Button } from "../../../components/common/Button";
+import { ErrorCard } from "../../../components/common/Card";
+import { ModalAlert } from "../../../components/common/ModalAlert";
 import {
-  LoadingTBody,
+  LoadingTbody,
   Table,
   Tbody,
   Td,
@@ -9,13 +12,9 @@ import {
   Thead,
 } from "../../../components/common/Table";
 import { ROUTE_PATHS } from "../../../constants/routes";
+import { useModalAlert } from "../../../hooks/useModalAlert";
 import { NailService } from "../../../types/nailService.types";
 import { useTableNailService } from "../hooks/useTableNailService";
-import { ErrorCard } from "../../../components/common/Card";
-import { ModalAlert } from "../../../components/common/ModalAlert";
-import { useModalAlert } from "../../../hooks/useModalAlert";
-import { Button } from "../../../components/common/Button";
-import { Pencil, Trash } from "lucide-react";
 
 export const TableNailService = () => {
   const { nailServices, error, loading, deleteNailService, listNailService } =
@@ -39,13 +38,7 @@ export const TableNailService = () => {
       </Thead>
       <Tbody>
         {loading ? (
-          <>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <SkeletonTheme key={index}>
-                <LoadingTBody count={4} />
-              </SkeletonTheme>
-            ))}
-          </>
+          <LoadingTbody count={4} />
         ) : nailServices.length === 0 ? (
           <tr>
             <Td colSpan={4} className="text-center py-8 text-gray-500">

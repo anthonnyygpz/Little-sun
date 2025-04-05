@@ -6,6 +6,8 @@ export const ROUTE_PATHS = {
   CLIENT: "/client",
   NAIL_SERVICE: "/nail-service",
   UDPATE_NAIL_SERVICE: "/update-nail-service",
+  CREATE_NAIL_SERVICE: "/create-nail-service",
+  CREATE_NAIL_DESIGN: "/nail-nail-design",
   NAIL_DESIGN: "/nail-design",
   UDPATE_NAIL_DESIGN: "/update-nail-design",
   LOGIN: "/login",

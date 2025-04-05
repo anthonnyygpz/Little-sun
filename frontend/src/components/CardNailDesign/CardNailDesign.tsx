@@ -19,13 +19,17 @@ export const CardNailDesign: React.FC<CardNailDesign> = ({ onChange }) => {
     handleUncheckAll,
     listNailDesign,
   } = useCardNailDesign({ onChange });
-  if (error)
+  if (error && nailDesigns.length > 0)
     return <ErrorCard onRetry={listNailDesign} technicalDetails={error} />;
 
   return (
     <div>
       {loading ? (
         <Skeleton count={3} height={20} />
+      ) : nailDesigns.length === 0 ? (
+        <div className="flex justify-center">
+          <span className="text-gray-500">No hay diseños disponible</span>
+        </div>
       ) : (
         <>
           {nailDesigns.map((nailDesign: NailDesign) => (

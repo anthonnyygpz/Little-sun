@@ -1,8 +1,26 @@
 import { API_CONFIG } from "../constants/api";
 import { apiService } from "./apiService";
-import { NailDesign } from "../types/nailDesign.types";
+import { NailDesign, CreateNailDesign } from "../types/nailDesign.types";
+import { AxiosError } from "axios";
 
 export const nailDesignService = {
+  createNailDesign: async (token: string, newNailDesign: CreateNailDesign) => {
+    try {
+      const response = await apiService.post(
+        API_CONFIG.ENDPOINTS.NAIL_DESIGN,
+        newNailDesign,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      return response.data;
+    } catch (error) {
+      console.error(String(error));
+      return Promise.reject(
+        error instanceof AxiosError
+          ? new Error(error.response?.data?.message || "Error de red")
+          : new Error("Error desconocido"),
+      );
+    }
+  },
   listNailDesign: async (
     token: string,
     skip: number = 0,
@@ -16,7 +34,11 @@ export const nailDesignService = {
       return response.data;
     } catch (error) {
       console.error("Error to list nail design: ", error);
-      throw new Error("Error to list nail design");
+      return Promise.reject(
+        error instanceof AxiosError
+          ? new Error(error.response?.data?.message || "Error de red")
+          : new Error("Error desconocido"),
+      );
     }
   },
   deleteNailDesign: async (token: string, id: number) => {
@@ -28,7 +50,11 @@ export const nailDesignService = {
       return response.data;
     } catch (error) {
       console.error("Error to delete nail design", error);
-      throw new Error("Error to list nail design");
+      return Promise.reject(
+        error instanceof AxiosError
+          ? new Error(error.response?.data?.message || "Error de red")
+          : new Error("Error desconocido"),
+      );
     }
   },
 };

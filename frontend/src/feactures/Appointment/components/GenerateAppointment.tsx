@@ -1,15 +1,15 @@
+import { ChevronLeft } from "lucide-react";
 import { CardClientInfo } from "../../../components/CardClientInfo/CardClientInfo";
+import { CardDateAndTime } from "../../../components/CardDateAndTime/CardDateAndTime";
 import { CardNailDesign } from "../../../components/CardNailDesign/CardNailDesign";
 import { CardNailService } from "../../../components/CardNailService/CardNailService";
 import { CardSculpingNailSize } from "../../../components/CardSculpingNailSize/CardScupingNailSize";
-import { useGenerateAppointment } from "../hooks/useGenerateAppointment";
-import { CardDateAndTime } from "../../../components/CardDateAndTime/CardDateAndTime";
-import { Title } from "../../../components/common/Title";
-import { SubTitle } from "../../../components/common/SubTitle";
-import { Label } from "../../../components/common/Label";
 import { Button } from "../../../components/common/Button";
-import { ChevronLeft } from "lucide-react";
+import { Label } from "../../../components/common/Label";
+import { SubTitle } from "../../../components/common/SubTitle";
+import { Title } from "../../../components/common/Title";
 import { ROUTE_PATHS } from "../../../constants/routes";
+import { useGenerateAppointment } from "../hooks/useGenerateAppointment";
 
 export const GenerateAppointment = () => {
   const {

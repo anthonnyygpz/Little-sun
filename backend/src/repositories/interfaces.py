@@ -156,7 +156,7 @@ class IUserRepository(ABC):
 class INailDesignRepository(ABC):
     @abstractmethod
     async def create_nail_design(
-        self, nail_design_in: NailDesignCreate
+        self, user_id: int, nail_design_in: NailDesignCreate
     ) -> NailDesignResponse:
         pass
 

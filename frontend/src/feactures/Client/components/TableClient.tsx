@@ -1,47 +1,54 @@
-import { ChevronLeft, ChevronRight, Pencil, Trash } from "lucide-react";
-import { useTableClient } from "../hooks/useTableClient";
-import { SkeletonTheme } from "react-loading-skeleton";
-import { LoadingTBody } from "../../../components/common/Table";
-import { Client } from "../../../types/client.types";
+import { Pencil, Trash } from "lucide-react";
 import { Button } from "../../../components/common/Button";
+import { ModalAlert } from "../../../components/common/ModalAlert";
+import {
+  LoadingTbody,
+  Table,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+} from "../../../components/common/Table";
 import { ROUTE_PATHS } from "../../../constants/routes";
 import { useModalAlert } from "../../../hooks/useModalAlert";
-import { ModalAlert } from "../../../components/common/ModalAlert";
+import { Client } from "../../../types/client.types";
+import { useTableClient } from "../hooks/useTableClient";
 
 export const TableClient = () => {
   const { listClients, loading, deleteClient } = useTableClient();
   const { openDialog, closeDialog, isOpen } = useModalAlert();
 
   return (
-    <table className="w-full text-left text-sm">
-      <thead className="bg-gray-50 text-gray-700 uppercase">
+    <Table>
+      <Thead>
         <tr>
-          <th className="px-4 py-3">ID</th>
-          <th className="px-4 py-3">Nombre</th>
-          <th className="px-4 py-3">Numbero de telefono</th>
-          <th className="px-4 py-3">Fecha de creacion</th>
-          <th className="px-4 py-3">Acciones</th>
+          <Th>ID</Th>
+          <Th>Nombre</Th>
+          <Th>Numbero de telefono</Th>
+          <Th>Fecha de creacion</Th>
+          <Th>Acciones</Th>
         </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-300">
+      </Thead>
+      <Tbody>
         {loading ? (
-          <>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <SkeletonTheme key={index}>
-                <LoadingTBody count={5} />
-              </SkeletonTheme>
-            ))}
-          </>
+          <LoadingTbody count={5} />
+        ) : listClients.length === 0 ? (
+          <tr>
+            <Td colSpan={4} className="text-center py-8 text-gray-500">
+              No hay servicios desponibles
+            </Td>
+          </tr>
         ) : (
           <>
             {listClients.map((client: Client) => {
               return (
                 <tr className="hover:bg-gray-50" key={client.client_id}>
-                  <td className="px-4 py-3">{client.client_id}</td>
-                  <td className="px-4 py-3">{client.name}</td>
-                  <td className="px-4 py-3">{client.phone_number}</td>
-                  <td className="px-4 py-3">{client.created_at}</td>
-                  <td className="px-4 py-3">
+                  <Td>{client.client_id}</Td>
+                  <Td>{client.name}</Td>
+                  <Td>{client.phone_number}</Td>
+                  <Td>{client.created_at}</Td>
+                  <Td>
                     <div className="flex flex-row gap-2">
                       <Button
                         className="btn-blue flex items-center gap-1 rounded-md px-3 py-1"
@@ -69,37 +76,14 @@ export const TableClient = () => {
                         </p>
                       </ModalAlert>
                     </div>
-                  </td>
+                  </Td>
                 </tr>
               );
             })}
           </>
         )}
-      </tbody>
-      <tfoot className="bg-gray-50 text-gray-700 uppercase">
-        <tr>
-          <th className="px-4 py-3" colSpan={4}>
-            Pagina
-          </th>
-          <td className="px-4 py-3">
-            <div className="flex justify-center items-center gap-2">
-              <button
-                className="hover:bg-gray-300 active:bg-gray-200 rounded-full p-2 transition-colors group disabled:bg-transparent"
-                disabled={true}
-              >
-                <ChevronLeft className="group-disabled:text-transparent" />
-              </button>
-              <span className="text-lg">1</span>
-              <button
-                className="hover:bg-gray-300 active:bg-gray-200 rounded-full p-2 transition-colors group disabled:bg-transparent"
-                disabled={true}
-              >
-                <ChevronRight className="group-disabled:text-transparent" />
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+      </Tbody>
+      <Tfoot colSpan={4} />
+    </Table>
   );
 };

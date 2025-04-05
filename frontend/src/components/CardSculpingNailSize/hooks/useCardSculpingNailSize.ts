@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   SculpingNailSize,
   SculpingNailSizeForm,
@@ -34,7 +34,7 @@ export const useCardSculpingNailSize = ({
 
   // Api
   // List SculpingNailSize
-  const listSculpingNailSize = async () => {
+  const listSculpingNailSize = useCallback(async () => {
     setLoadingListSculping(true);
     if (isAuthenticated && token) {
       try {
@@ -47,11 +47,11 @@ export const useCardSculpingNailSize = ({
         setLoadingListSculping(false);
       }
     }
-  };
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     listSculpingNailSize();
-  }, [isAuthenticated, token]);
+  }, [listSculpingNailSize, isAuthenticated, token]);
 
   return {
     handleUncheckAll,

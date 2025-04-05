@@ -9,16 +9,18 @@ import { AppointmentPage } from "./pages/appointments/ViewAppointment";
 import { CreateAppointmentPage } from "./pages/appointments/CreateAppointment";
 import { PublicRoute } from "./routes/PublicRoute";
 import { RegisterPage } from "./pages/auth/RegisterPage";
-import { ToastContainer } from "react-toastify";
 import { ViewClient } from "./pages/clients/ViewClient";
 import { ViewNailService } from "./pages/nailService/ViewNailService";
 import { ViewNailDesign } from "./pages/nailDesign/ViewNailDesign";
+import { CreateNailServicePage } from "./pages/nailService/CreateNailServicePage";
+import { Toaster } from "react-hot-toast";
+import { CreateNailDesignPage } from "./pages/nailDesign/CreateNailDesignPage";
 
 export const App = () => {
   return (
     <ErrorBoundary fallback={<div>Error critico - Recargar la pagina</div>}>
       <Router>
-        <ToastContainer />
+        <Toaster />
         <AuthProvider>
           <Routes>
             {/* Rutas publicas */}
@@ -46,6 +48,14 @@ export const App = () => {
               <Route
                 path={ROUTE_PATHS.NAIL_DESIGN}
                 element={<ViewNailDesign />}
+              />
+              <Route
+                path={ROUTE_PATHS.CREATE_NAIL_SERVICE}
+                element={<CreateNailServicePage />}
+              />
+              <Route
+                path={ROUTE_PATHS.CREATE_NAIL_DESIGN}
+                element={<CreateNailDesignPage />}
               />
             </Route>
 

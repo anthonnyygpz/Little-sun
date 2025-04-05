@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Client } from "../../../types/client.types";
 import { clientService } from "../../../api/clientService";
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
-import { toast } from "react-toastify/unstyled";
+import { toast } from "react-hot-toast";
+import { TOAST_MESSAGE } from "../../../constants/toast";
 
 export const useTableClient = () => {
   const [listClients, setListClients] = useState<Client[]>([]);
@@ -31,9 +32,9 @@ export const useTableClient = () => {
         setLoading(true);
         try {
           await toast.promise(clientService.deleteClient(token, id), {
-            success: "Se elimino exitosamente.",
-            pending: "Cargando...",
-            error: "Error al borrar.",
+            success: TOAST_MESSAGE.SUCCESS_DELETE,
+            loading: TOAST_MESSAGE.LOADING_DELETE,
+            error: TOAST_MESSAGE.ERROR_DELETE,
           });
           listClient();
         } catch (error) {

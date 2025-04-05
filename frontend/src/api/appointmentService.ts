@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { API_CONFIG } from "../constants/api";
 import { Appointment, CreateAppointment } from "../types/appointment.types";
 import { apiService } from "./apiService";
@@ -20,7 +21,11 @@ export const appointmentService = {
       return response.data;
     } catch (error) {
       console.error("Error to create apppointment", error);
-      throw new Error("Failded to create appointment");
+      return Promise.reject(
+        error instanceof AxiosError
+          ? new Error(error.response?.data?.message || "Error de red")
+          : new Error("Error desconocido"),
+      );
     }
   },
   listAppointment: async (token: string): Promise<Appointment[]> => {

@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify/unstyled";
 import { MainLayout } from "../../components/layouts/MainLayout/MainLayout";
 import { TableClient } from "../../feactures/Client/components/TableClient";
 import { Button } from "../../components/common/Button";
@@ -21,7 +20,6 @@ export const ViewClient = () => {
           <TableClient />
         </div>
       </div>
-      <ToastContainer />
     </MainLayout>
   );
 };

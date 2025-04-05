@@ -1,7 +1,6 @@
-import { SkeletonTheme } from "react-loading-skeleton";
 import { ErrorCard } from "../../../components/common/Card";
 import {
-  LoadingTBody,
+  LoadingTbody,
   Table,
   Tbody,
   Td,
@@ -37,13 +36,7 @@ export const TableNailDesign = () => {
       </Thead>
       <Tbody>
         {loading ? (
-          <>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <SkeletonTheme key={index}>
-                <LoadingTBody count={4} />
-              </SkeletonTheme>
-            ))}
-          </>
+          <LoadingTbody count={4} />
         ) : nailDesigns.length === 0 ? (
           <tr>
             <Td colSpan={4} className="text-center py-8 text-gray-500">

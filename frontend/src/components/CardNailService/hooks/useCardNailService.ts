@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { nailServiceService } from "../../../api/nailServiceService";
 import {
   NailService,
@@ -70,7 +70,7 @@ export const useCardNailService = ({ onChange }: ServicesProps) => {
 
   // Apis
   // Listado de servicios de uñas
-  const listNailService = async () => {
+  const listNailService = useCallback(async () => {
     setLoading(true);
     if (isAuthenticated && token) {
       try {
@@ -83,11 +83,11 @@ export const useCardNailService = ({ onChange }: ServicesProps) => {
         setLoading(false);
       }
     }
-  };
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     listNailService();
-  }, [isAuthenticated, token]);
+  }, [listNailService]);
 
   return {
     nailServices,

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { appointmentService } from "../../../api/appointmentService";
 import { Appointment } from "../../../types/appointment.types";
 
-import { toast } from "react-toastify/unstyled";
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
 
 export const useTableAppointment = () => {
@@ -41,11 +40,11 @@ export const useTableAppointment = () => {
     async (id: number) => {
       try {
         if (isAuthenticated && token) {
-          await toast.promise(appointmentService.deleteAppointment(token, id), {
-            success: "Se elimnio con exito.",
-            pending: "Cargando...",
-            error: "Error al borrar.",
-          });
+          // await toast.promise(appointmentService.deleteAppointment(token, id), {
+          //   success: "Se elimnio con exito.",
+          //   pending: "Cargando...",
+          //   error: "Error al borrar.",
+          // });
           listAppointment();
         }
       } catch (error) {
@@ -69,5 +68,6 @@ export const useTableAppointment = () => {
     deleteAppointment,
     nextPage,
     prevPage,
+    listAppointment,
   };
 };

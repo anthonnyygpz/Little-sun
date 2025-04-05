@@ -1,7 +1,6 @@
 import { Ban, Check, ChevronRight, Loader, Pencil, Trash } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { ModalAlert } from "../../../components/common/ModalAlert";
 import { ROUTE_PATHS } from "../../../constants/routes";
 import { useModalAlert } from "../../../hooks/useModalAlert";
@@ -168,7 +167,6 @@ export const MobilTableAppointment = () => {
                         >
                           <Trash className="h-4 w-4" />
                         </button>
-                        <ToastContainer />
                       </div>
                     )}
 
@@ -194,7 +192,6 @@ export const MobilTableAppointment = () => {
           );
         })}
       </ul>
-      <ToastContainer />
     </div>
   );
 };

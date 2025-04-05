@@ -20,7 +20,8 @@ export const CardSculpingNailSize: React.FC<CardSculpingNailSizeProps> = ({
     handleSelection,
     listSculpingNailSize,
   } = useCardSculpingNailSize({ onChange });
-  if (errorListSculpíng)
+
+  if (errorListSculpíng && listSculping.length > 0)
     return (
       <ErrorCard
         onRetry={() => listSculpingNailSize()}
@@ -44,6 +45,12 @@ export const CardSculpingNailSize: React.FC<CardSculpingNailSizeProps> = ({
               </div>
             </button>
           ))}
+        </div>
+      ) : listSculping.length === 0 ? (
+        <div className="flex justify-center">
+          <span className="text-gray-500">
+            No hay tamaños de uñas disponibles
+          </span>
         </div>
       ) : (
         <>

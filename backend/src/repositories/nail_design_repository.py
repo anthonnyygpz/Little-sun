@@ -19,13 +19,13 @@ class NailDesignRepository(INailDesignRepository):
     db: Session
 
     async def create_nail_design(
-        self, nail_design_in: NailDesignCreate
+        self, user_id: int, nail_design_in: NailDesignCreate
     ) -> NailDesignResponse:
         try:
             db_nail_design = NailDesign(
                 design_name=nail_design_in.design_name,
                 base_price=nail_design_in.base_price,
-                user_id=nail_design_in.user_id,
+                user_id=user_id,
             )
             self.db.add(db_nail_design)
             self.db.commit()

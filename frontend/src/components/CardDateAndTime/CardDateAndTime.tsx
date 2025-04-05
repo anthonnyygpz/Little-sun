@@ -47,40 +47,28 @@ export const CardDateAndTime: React.FC<CardDateAndTimeProps> = ({
         <div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label
-                className="block text-gray-700 mb-2 font-medium"
-                htmlFor="date"
-              >
-                <div className="flex items-center">
-                  <Calendar size={18} className="mr-2 text-purple-500" />
-                  <span>Fecha</span>
-                </div>
-              </Label>
               <Input
                 className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 outline-none"
                 onChange={handleInputChange}
                 value={formData.date}
+                label="Fecha"
                 name="date"
+                icon={<Calendar size={18} className="mr-2 text-purple-500" />}
                 type="date"
+                required
               />
             </div>
 
             <div>
-              <Label
-                className="block text-gray-700 mb-2 font-medium"
-                htmlFor="time"
-              >
-                <div className="flex items-center">
-                  <Clock size={18} className="mr-2 text-purple-500" />
-                  <span>Hora</span>
-                </div>
-              </Label>
               <Input
                 className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 outline-none"
+                icon={<Clock size={18} className="mr-2 text-purple-500" />}
                 onChange={handleInputChange}
                 value={formData.time}
+                label="Hora"
                 type="time"
                 name="time"
+                required
               />
             </div>
           </div>

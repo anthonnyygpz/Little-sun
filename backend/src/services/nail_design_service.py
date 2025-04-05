@@ -26,7 +26,9 @@ class NailDesignService:
                 status_code=status.HTTP_302_FOUND,
                 detail="This nail design already exists",
             )
-        nail_design = await self.nail_design_repo.create_nail_design(nail_design_in)
+        nail_design = await self.nail_design_repo.create_nail_design(
+            user_id=user_id, nail_design_in=nail_design_in
+        )
         return nail_design
 
     async def get_all_nail_design(

@@ -1,7 +1,6 @@
 import { useConvertToTitle } from "../../hooks/useConvertToTitle";
 import { Client, ClientInfo } from "../../types/client.types";
 import { Input } from "../common/Input";
-import { Label } from "../common/Label";
 import { SubTitle } from "../common/SubTitle";
 import { useCardClientInfo } from "./hooks/useCardClientInfo";
 
@@ -25,8 +24,8 @@ export const CardClientInfo: React.FC<CardClientInfo> = ({ onChange }) => {
 
       <div className="space-y-4">
         <div className="relative">
-          <Label htmlFor="name">Nombre Completo</Label>
           <Input
+            label="Nombre Completo"
             value={transformToTitle(formClient.name)}
             placeholder="Nombre(s) Apellidos"
             onChange={handleInputChange}
@@ -52,12 +51,12 @@ export const CardClientInfo: React.FC<CardClientInfo> = ({ onChange }) => {
         </div>
 
         <div>
-          <Label htmlFor="phone">Teléfono de Contacto</Label>
           <Input
+            label="Teléfono de Contacto"
             onChange={handleInputChange}
             placeholder="631 *** ****"
             value={formClient.phone}
-            required={true}
+            required={false}
             name="phone"
             type="tel"
           />

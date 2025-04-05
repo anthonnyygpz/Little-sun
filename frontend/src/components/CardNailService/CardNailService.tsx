@@ -23,13 +23,17 @@ export const CardNailService: React.FC<CardNailServiceProps> = ({
   } = useCardNailService({
     onChange,
   });
-  if (error)
+  if (error && nailServices.length > 0)
     return <ErrorCard onRetry={listNailService} technicalDetails={error} />;
 
   return (
     <div className="space-y-3">
       {loading ? (
         <Skeleton count={3} height={20} />
+      ) : nailServices.length === 0 ? (
+        <div className="flex justify-center">
+          <span className="text-gray-500">No hay servicios disponible</span>
+        </div>
       ) : (
         <>
           {nailServices.map((nailService) => (

@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
-import Skeleton from "react-loading-skeleton";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { ReactNode } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { twMerge } from "tailwind-merge";
-import { ChevronLeft, ChevronRight, Pencil, Trash } from "lucide-react";
-import { Button } from "./Button";
-import { useModalAlert } from "../../hooks/useModalAlert";
 
 export const Table: React.FC<{ children?: ReactNode; className?: string }> = ({
   children,
@@ -105,7 +103,8 @@ export const Tfoot: React.FC<{
     </tfoot>
   );
 };
-export const LoadingTBody: React.FC<{ count: number }> = ({ count }) => {
+
+export const LoadingTd: React.FC<{ count: number }> = ({ count }) => {
   return (
     <tr>
       {Array.from({ length: count }).map((_, index) => (
@@ -114,5 +113,17 @@ export const LoadingTBody: React.FC<{ count: number }> = ({ count }) => {
         </td>
       ))}
     </tr>
+  );
+};
+
+export const LoadingTbody: React.FC<{ count: number }> = ({ count }) => {
+  return (
+    <>
+      {Array.from({ length: 12 }).map((_, index) => (
+        <SkeletonTheme key={index}>
+          <LoadingTd count={count} />
+        </SkeletonTheme>
+      ))}
+    </>
   );
 };

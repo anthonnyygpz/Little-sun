@@ -4,7 +4,6 @@ from pydantic import BaseModel
 class NailServiceBase(BaseModel):
     service_name: str
     base_price: int
-    user_id: int
 
 
 class NailServiceCreate(NailServiceBase):

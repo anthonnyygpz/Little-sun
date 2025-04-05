@@ -45,7 +45,7 @@ export const useMenuHamburguer = () => {
         {
           title: "Crear Servicio",
           icon: <Plus className="w-5 h-5 mr-3" />,
-          route: "/generate-services",
+          route: ROUTE_PATHS.CREATE_NAIL_SERVICE,
         },
       ],
     },
@@ -60,7 +60,7 @@ export const useMenuHamburguer = () => {
         {
           title: "Crear Diseño",
           icon: <Plus className="w-5 h-5 mr-3" />,
-          route: "/create-nail-design",
+          route: ROUTE_PATHS.CREATE_NAIL_DESIGN,
         },
       ],
     },

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { NailDesign } from "../../../types/nailDesign.types";
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
 import { nailDesignService } from "../../../api/nailDesignService";
-import { toast } from "react-toastify";
-import { TOAST_Message } from "../../../constants/toast";
+import { TOAST_MESSAGE } from "../../../constants/toast";
+import { toast } from "react-hot-toast";
 
 export const useTableNailDesign = () => {
   const [nailDesigns, setNailDesigns] = useState<NailDesign[]>([]);
@@ -30,9 +30,9 @@ export const useTableNailDesign = () => {
       if (isAuthenticated && token) {
         try {
           await toast.promise(nailDesignService.deleteNailDesign(token, id), {
-            success: TOAST_Message.SUCCESS_DELETE,
-            pending: TOAST_Message.PENDING_DELETE,
-            error: TOAST_Message.ERROR_DELETE,
+            success: TOAST_MESSAGE.SUCCESS_DELETE,
+            loading: TOAST_MESSAGE.LOADING_DELETE,
+            error: TOAST_MESSAGE.ERROR_DELETE,
           });
           listNailDesign();
         } catch (error) {
