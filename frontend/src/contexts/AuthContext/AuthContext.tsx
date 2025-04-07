@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     isAuthenticated: false,
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const checkAuth = async () => {
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkAuth();
   }, []);
 
-  const login = async (credentials: Credentials) => {
+  const login = async (rememberMe: boolean, credentials: Credentials) => {
     setLoading(true);
     try {
       const { access_token } = await authService.login(credentials);
@@ -43,8 +44,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setAuthState({ token: access_token, isAuthenticated: true });
 
       navigate(ROUTE_PATHS.APPOINTMENTS);
-    } catch {
-      console.error("Error to login");
+    } catch (err) {
+      console.error("Error to login: ", err);
+
+      const message =
+        err instanceof Error
+          ? "Correo o contraseña invalido."
+          : "error desconocido.";
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -56,7 +63,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     navigate(ROUTE_PATHS.LOGIN);
   };
   return (
-    <AuthContext.Provider value={{ ...authState, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{ ...authState, login, logout, loading, error }}
+    >
       {children}
     </AuthContext.Provider>
   );

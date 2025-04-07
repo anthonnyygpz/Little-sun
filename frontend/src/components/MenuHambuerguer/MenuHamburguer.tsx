@@ -11,7 +11,7 @@ export const MenuHamburguer = () => {
   return (
     <div className="relative">
       <Button
-        className="fixed bottom-4 left-4 z-50 p-2 rounded-md btn-purple focus:outline-none"
+        className="fixed bottom-4 left-4 z-50 p-2 rounded-md btn-purple focus:outline-none w-15"
         onClick={toggleSidebar}
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

@@ -28,7 +28,10 @@ export const Button: React.FC<ButtonProps> = ({
       <button
         type={type}
         onClick={onClick}
-        className={twMerge("btn-purple rounded px-2 py-1", className)}
+        className={twMerge(
+          "btn-purple w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2",
+          className,
+        )}
       >
         {children}
       </button>

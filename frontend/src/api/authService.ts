@@ -14,8 +14,7 @@ export const authService = {
         formData,
       );
       return response.data;
-    } catch (error) {
-      console.error("Error authentication: ", error);
+    } catch {
       throw new Error("Failed to get token");
     }
   },
@@ -26,8 +25,7 @@ export const authService = {
         API_CONFIG.ENDPOINTS.VERIFY_TOKEN + `?token=${token}`,
       );
       return response.data;
-    } catch (error) {
-      console.error(error);
+    } catch {
       throw new Error("Invalid token");
     }
   },

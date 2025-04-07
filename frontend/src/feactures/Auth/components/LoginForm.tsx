@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
 import { useLoginForm } from "../hooks/useLoginForm";
 import { ROUTE_PATHS } from "../../../constants/routes.ts";
 import { Loader } from "lucide-react";
+import { Input } from "../../../components/common/Input.tsx";
+import { Label } from "../../../components/common/Label.tsx";
+import { Button } from "../../../components/common/Button.tsx";
 
 export const LoginForm = () => {
   const {
@@ -12,93 +14,66 @@ export const LoginForm = () => {
     rememberMe,
     setRememberMe,
     loading,
-    // error,
+    error,
     handleSubmit,
   } = useLoginForm();
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <label
-          className="block text-sm font-medium text-gray-700"
-          htmlFor="email"
-        >
-          Correo electrónico:
-        </label>
-        <input
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          placeholder="ejemplo@correo.com"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+        <Input
+          name="email"
           type="email"
-          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           required
+          placeholder="tucorreo@ejemplo.com"
+          label="Correo electrónico"
         />
       </div>
 
       <div>
-        <label
-          className="block text-sm font-medium text-gray-700"
-          htmlFor="password"
-        >
-          Contraseña:
-        </label>
-        <input
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-          placeholder="Tu contraseña"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          value={password}
+        <Input
+          label="Contraseña"
+          name="password"
           type="password"
-          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
           required
+          placeholder="••••••••"
         />
       </div>
 
-      <div>
-        <div className="flex flex-row gap-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <input
-            onChange={() => setRememberMe(!rememberMe)}
+            id="rememberMe"
+            name="rememberMe"
             checked={rememberMe}
+            onChange={() => setRememberMe(!rememberMe)}
             type="checkbox"
-            id="remember"
+            className="h-4 w-4 accent-purple-500 focus:ring-purple-500 border-gray-300 rounded"
           />
-          <label htmlFor="remember">Recordarme</label>
+          <Label htmlFor="rememberMe">Recordarme</Label>
         </div>
-
-        <Link
-          className="text-purple-500 hover:text-purple-700"
-          to={ROUTE_PATHS.LOGIN}
-        >
-          ¿Olvidaste tu contraseña?
-        </Link>
+        <div>
+          <Button
+            href={ROUTE_PATHS.FORGOT_PASSWORD}
+            className="font-medium  text-purple-600 hover:text-purple-500"
+          >
+            ¿Olvidaste tu contraseña?
+          </Button>
+        </div>
       </div>
 
-      <span className="text-red-700 flex justify-center"></span>
+      <span className="block text-red-500 text-center">{error}</span>
 
-      <button
-        className="btn-purple rounded p-1"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? (
-          <Loader className="w-full animate-spin" />
-        ) : (
-          "Iniciar Sesión"
-        )}
-      </button>
-
-      <div className="grid place-items-center">
-        <span className="text-sm font-medium text-gray-700">
-          ¿No tienes una cuenta?
-        </span>
-        <Link
-          className="text-purple-500 hover:text-purple-700"
-          to={ROUTE_PATHS.REGISTER}
-        >
-          Registrate
-        </Link>
+      <div>
+        <Button type="submit">
+          {loading ? <Loader className="h-7 w-7  animate-spin" /> : "Ingresar"}
+        </Button>
       </div>
     </form>
   );

@@ -10,7 +10,7 @@ export const Label: React.FC<{
 }> = ({ children, className, htmlFor, id, title }) => {
   return (
     <label
-      className={twMerge("block text-gray-700 mb-2 font-medium", className)}
+      className={twMerge("block text-lg font-medium text-gray-700", className)}
       htmlFor={htmlFor}
       title={title}
       id={id}

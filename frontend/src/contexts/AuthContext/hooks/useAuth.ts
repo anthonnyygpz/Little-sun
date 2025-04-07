@@ -3,9 +3,10 @@ import { createContext, useContext } from "react";
 import { AuthState } from "../types/auth.types";
 
 interface AuthContextType extends AuthState {
-  login: (credentials: Credentials) => Promise<void>;
+  login: (remeberMe: boolean, credentials: Credentials) => Promise<void>;
   logout: () => void;
   loading: boolean;
+  error: string | null;
 }
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined,

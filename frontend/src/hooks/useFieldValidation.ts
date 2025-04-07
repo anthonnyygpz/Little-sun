@@ -6,5 +6,9 @@ export const useFieldValidation = () => {
       FIELD_VALIDATIONS[name as keyof typeof FIELD_VALIDATIONS];
     return value.replace(validationPattern, "");
   };
-  return { filterFieldValue };
+
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+  return { filterFieldValue, isValidEmail };
 };

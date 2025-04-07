@@ -1,5 +1,6 @@
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_APP_API_URL || "http://0.0.0.0:8000/api/v1",
+  BASE_URL:
+    import.meta.env.VITE_APP_API_URL || "http://192.168.100.9:8000/api/v1",
   ENDPOINTS: {
     APPOINTMENTS: "/appointments/",
     USERS: "/users/",
