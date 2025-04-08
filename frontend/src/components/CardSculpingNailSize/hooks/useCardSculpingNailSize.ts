@@ -3,7 +3,7 @@ import {
   SculpingNailSize,
   SculpingNailSizeForm,
 } from "../../../types/sculpingNailSize.types";
-import { sculpingNailsize } from "../../../api/sculpingNailSizeService";
+import { sculpingNailsizeService } from "../../../api/sculpingNailSizeService";
 import { useAuth } from "../../../contexts/AuthContext/hooks/useAuth";
 
 interface useCardSculpingNailSizeProps {
@@ -38,7 +38,7 @@ export const useCardSculpingNailSize = ({
     setLoadingListSculping(true);
     if (isAuthenticated && token) {
       try {
-        const data = await sculpingNailsize.listSculpingNailSize(token);
+        const data = await sculpingNailsizeService.listSculpingNailSize(token);
         setListSculping(data);
       } catch (error) {
         console.error(error);

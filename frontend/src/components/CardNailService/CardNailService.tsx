@@ -31,7 +31,7 @@ export const CardNailService: React.FC<CardNailServiceProps> = ({
       {loading ? (
         <Skeleton count={3} height={20} />
       ) : nailServices.length === 0 ? (
-        <div className="flex justify-center">
+        <div className="flex">
           <span className="text-gray-500">No hay servicios disponible</span>
         </div>
       ) : (

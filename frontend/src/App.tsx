@@ -15,12 +15,14 @@ import { ViewNailDesign } from "./pages/nailDesign/ViewNailDesign";
 import { CreateNailServicePage } from "./pages/nailService/CreateNailServicePage";
 import { Toaster } from "react-hot-toast";
 import { CreateNailDesignPage } from "./pages/nailDesign/CreateNailDesignPage";
+import { ViewSculpingNailSizePage } from "./pages/sculpingNailSize/viewSculpingNailSize";
+import { CreateSculpingNailSizePage } from "./pages/sculpingNailSize/createSculpingNailSizePage";
 
 export const App = () => {
   return (
     <ErrorBoundary fallback={<div>Error critico - Recargar la pagina</div>}>
       <Router>
-        <Toaster />
+        <Toaster position="bottom-right" reverseOrder={false} />
         <AuthProvider>
           <Routes>
             {/* Rutas publicas */}
@@ -56,6 +58,14 @@ export const App = () => {
               <Route
                 path={ROUTE_PATHS.CREATE_NAIL_DESIGN}
                 element={<CreateNailDesignPage />}
+              />
+              <Route
+                path={ROUTE_PATHS.SCULPING}
+                element={<ViewSculpingNailSizePage />}
+              />
+              <Route
+                path={ROUTE_PATHS.CREATE_SCULPING}
+                element={<CreateSculpingNailSizePage />}
               />
             </Route>
 

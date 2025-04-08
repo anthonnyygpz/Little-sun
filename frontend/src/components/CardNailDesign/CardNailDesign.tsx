@@ -27,7 +27,7 @@ export const CardNailDesign: React.FC<CardNailDesign> = ({ onChange }) => {
       {loading ? (
         <Skeleton count={3} height={20} />
       ) : nailDesigns.length === 0 ? (
-        <div className="flex justify-center">
+        <div className="flex">
           <span className="text-gray-500">No hay diseños disponible</span>
         </div>
       ) : (

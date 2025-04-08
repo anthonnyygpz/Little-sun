@@ -19,8 +19,8 @@ import { Td } from "../../../components/common/Table";
 export const TableAppointment = () => {
   const {
     appointments,
-    loadingLisAppointment,
-    errorListAppointment,
+    loading,
+    error,
     deleteAppointment,
     nextPage,
     prevPage,
@@ -46,8 +46,8 @@ export const TableAppointment = () => {
     },
   };
 
-  if (errorListAppointment && appointments.length > 0)
-    return <ErrorCard onRetry={listAppointment} />;
+  if (error) return <ErrorCard onRetry={listAppointment} />;
+
   return (
     <Table>
       <Thead>
@@ -65,7 +65,7 @@ export const TableAppointment = () => {
         </tr>
       </Thead>
       <Tbody>
-        {loadingLisAppointment ? (
+        {loading ? (
           <LoadingTbody count={10} />
         ) : appointments.length === 0 ? (
           <tr>

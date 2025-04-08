@@ -12,9 +12,10 @@ export const RegisterForm = () => {
     loading,
     password,
     setPassword,
+    error,
     handleSubmit,
   } = useRegisterForm();
-  console.log(loading);
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
@@ -53,6 +54,8 @@ export const RegisterForm = () => {
           minLength={8}
         />
       </div>
+
+      <p className="block text-red-500 text-center">{error}</p>
 
       <Button type="submit">
         {loading ? <Loader className="w-7 h-7 animate-spin" /> : "Registrarse"}

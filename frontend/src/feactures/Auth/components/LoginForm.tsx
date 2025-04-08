@@ -71,7 +71,7 @@ export const LoginForm = () => {
       <span className="block text-red-500 text-center">{error}</span>
 
       <div>
-        <Button type="submit">
+        <Button className="w-full" type="submit">
           {loading ? <Loader className="h-7 w-7  animate-spin" /> : "Ingresar"}
         </Button>
       </div>

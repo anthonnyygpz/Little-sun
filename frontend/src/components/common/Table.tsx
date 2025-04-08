@@ -1,7 +1,9 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, Trash } from "lucide-react";
 import React, { ReactNode } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { twMerge } from "tailwind-merge";
+import { Button } from "./Button";
+import { useModalAlert } from "../../hooks/useModalAlert";
 
 export const Table: React.FC<{ children?: ReactNode; className?: string }> = ({
   children,
@@ -125,5 +127,30 @@ export const LoadingTbody: React.FC<{ count: number }> = ({ count }) => {
         </SkeletonTheme>
       ))}
     </>
+  );
+};
+
+export const TdActions: React.FC<{
+  editRoute: string;
+  openDialog: () => void;
+}> = ({ editRoute, openDialog }) => {
+  return (
+    <Td>
+      <div className="flex justify-center flex-row gap-2">
+        <Button
+          className="btn-blue flex items-center gap-1 rounded-md px-3 py-1"
+          href={editRoute}
+        >
+          <Pencil className="h-4 w-4" />
+          <span>Editar</span>
+        </Button>
+        <Button
+          className="btn-red flex items-center rounded-md p-2"
+          onClick={() => openDialog()}
+        >
+          <Trash className="h-4 w-4" />
+        </Button>
+      </div>
+    </Td>
   );
 };

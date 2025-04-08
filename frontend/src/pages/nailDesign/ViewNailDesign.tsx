@@ -1,4 +1,5 @@
 import { MainLayout } from "../../components/layouts/MainLayout/MainLayout";
+import { MobilTableNailDesign } from "../../feactures/NailDesign/components/MobilTableNailDesign";
 import { TableNailDesign } from "../../feactures/NailDesign/components/TableNailDesign";
 
 export const ViewNailDesign = () => {
@@ -8,6 +9,7 @@ export const ViewNailDesign = () => {
         <div className="hidden md:block overflow-auto">
           <TableNailDesign />
         </div>
+        <MobilTableNailDesign />
       </div>
     </MainLayout>
   );

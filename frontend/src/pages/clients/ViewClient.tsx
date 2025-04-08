@@ -3,6 +3,7 @@ import { TableClient } from "../../feactures/Client/components/TableClient";
 import { Button } from "../../components/common/Button";
 import { ChevronLeft } from "lucide-react";
 import { ROUTE_PATHS } from "../../constants/routes";
+import { MobilTableClient } from "../../feactures/Client/components/MobilTableClient";
 
 export const ViewClient = () => {
   return (
@@ -19,6 +20,7 @@ export const ViewClient = () => {
         <div className="hidden md:block overflow-auto">
           <TableClient />
         </div>
+        <MobilTableClient />
       </div>
     </MainLayout>
   );

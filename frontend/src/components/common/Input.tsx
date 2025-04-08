@@ -93,7 +93,7 @@ export const Input: React.FC<InputProps> = ({
         <Label
           htmlFor={name}
           title={required ? "Campo requerido" : ""}
-          className={labelClassName}
+          className={twMerge("", labelClassName)}
         >
           {icon}
           <span>{label}</span>
@@ -140,10 +140,7 @@ export const Input: React.FC<InputProps> = ({
       {hasError && (
         <p
           id={`${name}-error`}
-          className={twMerge(
-            "mt-1 text-[2rem] lg:text-sm text-red-500",
-            errorClassName,
-          )}
+          className={twMerge("mt-1 text-sm text-red-500", errorClassName)}
         >
           {errors[0]}
         </p>

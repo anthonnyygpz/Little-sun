@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import { Calendar, DraftingCompass, Palette, Plus, User } from "lucide-react";
+import {
+  Calendar,
+  DraftingCompass,
+  Palette,
+  Plus,
+  Ruler,
+  User,
+} from "lucide-react";
 import { ROUTE_PATHS } from "../../../constants/routes";
+import { Title } from "../../common/Title";
 
 export const useMenuHamburguer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +69,21 @@ export const useMenuHamburguer = () => {
           title: "Crear Diseño",
           icon: <Plus className="w-5 h-5 mr-3" />,
           route: ROUTE_PATHS.CREATE_NAIL_DESIGN,
+        },
+      ],
+    },
+    {
+      title: "Esculpido",
+      subDetails: [
+        {
+          title: "Esculpido",
+          icon: <Ruler className="w-5 h-5 mr-3" />,
+          route: ROUTE_PATHS.SCULPING,
+        },
+        {
+          title: "Crear Esculpido",
+          icon: <Plus className="w-5 h-5 mr-3" />,
+          route: ROUTE_PATHS.CREATE_SCULPING,
         },
       ],
     },

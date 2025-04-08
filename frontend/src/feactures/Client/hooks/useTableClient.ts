@@ -11,6 +11,9 @@ export const useTableClient = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { isAuthenticated, token } = useAuth();
 
+  const nextPage = () => console.log("Siguente pagina");
+  const prevPage = () => console.log("Anterior pagina");
+
   const listClient = useCallback(async () => {
     if (isAuthenticated && token) {
       setLoading(true);
@@ -52,5 +55,13 @@ export const useTableClient = () => {
     listClient();
   }, [listClient]);
 
-  return { listClients, error, loading, deleteClient };
+  return {
+    listClients,
+    error,
+    loading,
+    deleteClient,
+    nextPage,
+    prevPage,
+    listClient,
+  };
 };

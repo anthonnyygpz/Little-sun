@@ -66,7 +66,7 @@ export const GenerateAppointment = () => {
                   />
                 </div>
 
-                <div className="mb-6">
+                <div>
                   <Label>Servicios Principales</Label>
                 </div>
                 <CardNailService

@@ -29,7 +29,7 @@ from src.schemas.sculping_nail_size import (
     SculpingNailSizeResponse,
     SculpingNailSizeUpdate,
 )
-from src.schemas.user import UserCreate
+from src.schemas.user import UserCreate, UserResponse
 
 
 ### IClient
@@ -144,11 +144,15 @@ class IAuthRepository(ABC):
 ### IUser
 class IUserRepository(ABC):
     @abstractmethod
-    async def create_user(self, user_in: UserCreate) -> User:
+    async def create_user(self, user_in: UserCreate) -> UserResponse:
         pass
 
     @abstractmethod
-    async def get_by_email(self, email: str) -> User:
+    async def get_by_email(self, email: str) -> UserResponse:
+        pass
+
+    @abstractmethod
+    async def get_by_name(self, name: str) -> UserResponse:
         pass
 
 

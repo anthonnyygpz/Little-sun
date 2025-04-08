@@ -27,7 +27,7 @@ export const CardDateAndTime: React.FC<CardDateAndTimeProps> = ({
     <div className="mb-8">
       <SubTitle>Fecha y Hora</SubTitle>
 
-      <div className="flex justify-center items-center gap-1 w-full">
+      <div className="flex justify-center items-center w-full mb-4">
         <Label
           className="mb-0 text-xl border border-gray-200 hover:border-purple-400 transition-colors rounded-lg p-2 cursor-pointer"
           htmlFor="checkAppointment"
@@ -48,6 +48,7 @@ export const CardDateAndTime: React.FC<CardDateAndTimeProps> = ({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Input
+                labelClassName="flex items-center"
                 className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 outline-none"
                 onChange={handleInputChange}
                 value={formData.date}
@@ -61,6 +62,7 @@ export const CardDateAndTime: React.FC<CardDateAndTimeProps> = ({
 
             <div>
               <Input
+                labelClassName="flex items-center"
                 className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 outline-none"
                 icon={<Clock size={18} className="mr-2 text-purple-500" />}
                 onChange={handleInputChange}

@@ -16,6 +16,12 @@ class UserService:
                 status_code=status.HTTP_302_FOUND, detail="Already exist email"
             )
 
+        user = await self.user_repo.get_by_name(name=user_in.username)
+        if user:
+            raise HTTPException(
+                status_code=status.HTTP_302_FOUND, detail="Already exist username"
+            )
+
         user = await self.user_repo.create_user(user_in=user_in)
         return user
 

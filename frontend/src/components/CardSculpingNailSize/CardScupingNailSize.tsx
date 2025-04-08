@@ -47,7 +47,7 @@ export const CardSculpingNailSize: React.FC<CardSculpingNailSizeProps> = ({
           ))}
         </div>
       ) : listSculping.length === 0 ? (
-        <div className="flex justify-center">
+        <div className="flex">
           <span className="text-gray-500">
             No hay tamaños de uñas disponibles
           </span>

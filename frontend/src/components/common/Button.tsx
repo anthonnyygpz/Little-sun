@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
         type={type}
         onClick={onClick}
         className={twMerge(
-          "btn-purple w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2",
+          "btn-purple flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2",
           className,
         )}
       >

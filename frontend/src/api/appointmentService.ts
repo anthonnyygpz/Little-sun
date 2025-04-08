@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { API_CONFIG } from "../constants/api";
 import { Appointment, CreateAppointment } from "../types/appointment.types";
 import { apiService } from "./apiService";
@@ -37,8 +37,17 @@ export const appointmentService = {
       });
       return response.data;
     } catch (error) {
-      console.error("Error list appointments: ", error);
-      throw new Error("Failed to list appointments");
+      let errorMessage =
+        "Error al obtener la lista citas. Por favor intente nuevamente.";
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data.detail;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+      console.error("Error to list appopintments: ", error);
+      throw new Error(errorMessage);
     }
   },
   deleteAppointment: async (token: string, id: number) => {

@@ -8,11 +8,8 @@ import { TOAST_MESSAGE } from "../../../constants/toast";
 
 export const useTableAppointment = () => {
   const [appointments, setAppointment] = useState<Appointment[]>([]);
-  const [errorListAppointment, setErrorListAppointment] = useState<
-    string | null
-  >(null);
-  const [loadingLisAppointment, setLoadingLisAppointment] =
-    useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
   const { isAuthenticated, token } = useAuth();
 
@@ -30,10 +27,13 @@ export const useTableAppointment = () => {
         const data = await appointmentService.listAppointment(token);
         setAppointment(data);
       } catch (error) {
-        console.error(error);
-        setErrorListAppointment("Error al listar las citas");
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Ocurrio un error desconocido.");
+        }
       } finally {
-        setLoadingLisAppointment(false);
+        setLoading(false);
       }
     }
   }, [isAuthenticated, token]);
@@ -64,8 +64,8 @@ export const useTableAppointment = () => {
   return {
     expandedRow,
     appointments,
-    errorListAppointment,
-    loadingLisAppointment,
+    error,
+    loading,
     toggleRow,
     deleteAppointment,
     nextPage,
